@@ -9,17 +9,222 @@
 </head>
 
 <body>
-    <textarea id='code'>let camel = 'duck'; camel</textarea>
-
-    <button onclick='handelSubmit()'>click</button>
-
-    <script>
-        function handelSubmit() {
-            let code = document.getElementById('code').value;
-            result = eval(code);
-            console.log(result);
-        }
-    </script>
+<div id="adpanel0"
+  style="position: absolute; top: 0px; left: 0px; background-color: black; z-index: 5000; display: block; height: 97%; right: 57px;">
+  <div id="adpanel-tabs" style="z-index: 5000; background-color: white; height: 24px; width: 100%;"><button
+      id="bttab-bboalert"
+      style="width: 25%; height: 100%; font-size: 16px; background-color: blue; color: white; display: inline;">Data</button><button
+      id="bttab-options"
+      style="width: 25%; height: 100%; font-size: 16px; background-color: red; color: white; display: inline;">Options</button><button
+      id="bttab-buttons"
+      style="width: 25%; height: 100%; font-size: 16px; background-color: rgb(211, 211, 211); color: black; display: inline;">Shortcuts</button><button
+      id="bttab-info"
+      style="width: 25%; height: 100%; font-size: 16px; background-color: palegreen; color: black; display: inline;">Documents</button>
+  </div>
+  <div id="adpanel"
+    style="overflow: hidden auto; z-index: 5000; background-color: red; width: 100%; height: 100%; display: none;">
+    <select id="bboalert-ds" style="width: 100%; font-size: 18px; background-color: yellow;">
+      <option>Options-All</option>
+      <option>Options-None</option>
+      <option>Disable-Alerts</option>
+    </select><button id="Option,Selective Option Display"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">Selective Option
+      Display</button><button id="Option,Entire system"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">Entire system</button><button
+      id="Option,Opening"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">Opening</button><button
+      id="Option,After overcall @s"
+      style="width: 100%; background-color: cyan; text-align: center; display: block;">After overcall</button><button
+      id="Option,vs_1N-(Db) Penalty"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1N-(Db)
+      Penalty</button><button id="Option,vs_1N-(Db) 4 Ma + 5 mi"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(Db) 4 Ma + 5
+      mi</button><button id="Option,vs_1N-(2C) DONT (!C and a higher)"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1N-(2C) DONT (!C and a
+      higher)</button><button id="Option,vs_1N-(2C) Nat"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2C) Nat</button><button
+      id="Option,vs_1N-(2C) Capaletti - Onesuited"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2C) Capaletti -
+      Onesuited</button><button id="Option,vs_1N-(2C) Majors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2C) Majors</button><button
+      id="Option,vs_1N-(2C) Diamonds or Majors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2C) Diamonds or
+      Majors</button><button id="Option,vs_1N-(2D) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1N-(2D)
+      Nat</button><button id="Option,vs_1N-(2D) DONT (!D and a higher)"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2D) DONT (!D and a
+      higher)</button><button id="Option,vs_1N-(2D) Majors - Cappeletti"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2D) Majors -
+      Cappeletti</button><button id="Option,vs_1N-(2D) Multi - One major"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2D) Multi - One
+      major</button><button id="Option,vs_1N-(2D) Hearts"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2D) Hearts</button><button
+      id="Option,vs_1N-(2D) Hearts or spades and clubs"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2D) Hearts or spades and
+      clubs</button><button id="Option,vs_1N-(2H) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1N-(2H)
+      Nat</button><button id="Option,vs_1N-(2H) Majors (DONT)"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2H) Majors
+      (DONT)</button><button id="Option,vs_1N-(2H) Hearts and another suit"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2H) Hearts and another
+      suit</button><button id="Option,vs_1N-(2S) Spades and a minor - Cappeletti"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1N-(2S) Spades and a minor
+      - Cappeletti</button><button id="Option,vs_1N-(2S) Nat"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1N-(2S) Nat</button><button
+      id="Option,vs_1H-(2H) Michaels (!S and a Minor)"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1H-(2H) Michaels (!S and a
+      Minor)</button><button id="Option,vs_1H-(2H) Michaels (!S and !D)"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1H-(2H) Michaels (!S and
+      !D)</button><button id="Option,vs_1C-(Db) T/O"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(Db)
+      T/O</button><button id="Option,vs_1C-(Db) Majors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(Db) Majors</button><button
+      id="Option,vs_1C-(Db) Minors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(Db) Minors</button><button
+      id="Option,vs_1C-(1D) Any"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(1D)
+      Any</button><button id="Option,vs_1C-(1H) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(1H)
+      Nat</button><button id="Option,vs_1C-(1H) Spades or minors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(1H) Spades or
+      minors</button><button id="Option,vs_1C-(1S) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(1S)
+      Nat</button><button id="Option,vs_1C-(1S) Clubs or Hearts and Diamonds"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(1S) Clubs or Hearts and
+      Diamonds</button><button id="Option,vs_1C-(1N) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(1N)
+      Nat</button><button id="Option,vs_1C-(1N) Minors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(1N) Minors</button><button
+      id="Option,vs_1C-(1N) Majors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(1N) Majors</button><button
+      id="Option,vs_1C-(1N) Any 2-suiter"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(1N) Any
+      2-suiter</button><button id="Option,vs_1C-(2C) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(2C)
+      Nat</button><button id="Option,vs_1C-(2C) Majors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(2C) Majors</button><button
+      id="Option,vs_1C-(2D) Nat or majors"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(2D) Nat or
+      majors</button><button id="Option,vs_1C-(2D) !H or black suits"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(2D) !H or black
+      suits</button><button id="Option,vs_1C-(2H) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(2H)
+      Nat</button><button id="Option,vs_1C-(2H) !S or minor"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(2H) !S or
+      minor</button><button id="Option,vs_1C-(2N) 2 unknown suits"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_1C-(2N) 2 unknown
+      suits</button><button id="Option,vs_1C-(2N) 1 known suit"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(2N) 1 known
+      suit</button><button id="Option,vs_1C-(2N) 2 known suits"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_1C-(2N) 2 known
+      suits</button><button id="Option,Opening_@3@4"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">Opening_@3@4</button><button
+      id="Option,Overcalls @s"
+      style="width: 100%; background-color: cyan; text-align: center; display: block;">Overcalls</button><button
+      id="Option,vs_(3H) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(3H) Nat</button><button
+      id="Option,vs_(3H) Preempt in !S"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(3H) Preempt in
+      !S</button><button id="Option,vs_(3D) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(3D) Nat</button><button
+      id="Option,vs_(3D) Preempt in !H"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(3D) Preempt in
+      !H</button><button id="Option,vs_(3C) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(3C) Nat</button><button
+      id="Option,vs_(3C) Preempt in !D"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(3C) Preempt in
+      !D</button><button id="Option,vs_(2N) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(2N) Nat</button><button
+      id="Option,vs_(2N) Preempt in !C"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2N) Preempt in
+      !C</button><button id="Option,vs_(2S) Spades and a minor"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(2S) Spades and a
+      minor</button><button id="Option,vs_(2H) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(2H) Nat</button><button
+      id="Option,vs_(2H) Majors; weak"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2H) Majors;
+      weak</button><button id="Option,vs_(2D) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(2D) Nat</button><button
+      id="Option,vs_(2D) Multi" style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2D)
+      Multi</button><button id="Option,vs_(2D) Majors"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2D) Majors</button><button
+      id="Option,vs_(2D) Flannery"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2D) Flannery</button><button
+      id="Option,vs_(2C) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(2C) Nat</button><button
+      id="Option,vs_(2C) Strong" style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2C)
+      Strong</button><button id="Option,vs_(2C) Bulti"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(2C) Bulti</button><button
+      id="Option,vs_(1S) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(1S) Nat</button><button
+      id="Option,vs_(1S) Showing !D"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1S) Showing !D</button><button
+      id="Option,vs_(1H) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(1H) Nat</button><button
+      id="Option,vs_(1H) Showing !C"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1H) Showing !C</button><button
+      id="Option,vs_(1D) Nat (4+!D)"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(1D) Nat
+      (4+!D)</button><button id="Option,vs_(1D) Precision (Not promising 4!D)"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1D) Precision (Not promising
+      4!D)</button><button id="Option,vs_(1D) Showing !S"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1D) Showing !S</button><button
+      id="Option,vs_(1C) Nat"
+      style="width: 100%; background-color: lightgreen; text-align: left; display: block;">vs_(1C) Nat</button><button
+      id="Option,vs_(1C) 2+!C (Polish Club)"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1C) 2+!C (Polish
+      Club)</button><button id="Option,vs_(1C) Strong"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1C) Strong</button><button
+      id="Option,vs_(1C) Showing !H"
+      style="width: 100%; background-color: white; text-align: left; display: none;">vs_(1C) Showing !H</button></div>
+  <div id="adpanel1"
+    style="width: 100%; height: 100%; display: block; z-index: 5000; overflow: hidden auto; background-color: blue; color: white;">
+    <select id="bboalert-menu-file" style="width: 50%; font-size: 18px; background-color: lightblue;">
+      <option>Data...</option>
+      <option> Paste (New)</option>
+      <option> Paste (Append)</option>
+      <option> Clear</option>
+      <option> Copy All</option>
+      <option> Copy New</option>
+      <option> Copy Log</option>
+      <option> Copy Original</option>
+      <option style=""> Clear Recent URLs</option>
+      <option value="https://raw.githubusercontent.com/metonline/BBOalert_data/main/meto/meto_root_ratrut.txt"
+        style="background-color: white;">meto 210509</option>
+      <option value="https://raw.githubusercontent.com/stanmaz/BBOalert/master/Systems/test/AvocadoClub9.txt"
+        style="background-color: white;">Avocado Club 9</option>
+    </select><select id="bboalert-menu-settings" style="width: 50%; font-size: 18px; background-color: aquamarine;">
+      <option>Settings ...</option>
+      <option>Shortcuts</option>
+      <option>Hover BBOalert Tabs</option>
+      <option>Hover BBO Tabs</option>
+      <option>✔Collapse Options</option>
+    </select><select id="bboalert-menu-config"
+      style="width: 100%; font-size: 18px; background-color: bisque; display: none;">
+      <option>Plugin settings ...</option>
+    </select>
+    <p id="bboalert-p1" style="margin: 5px;">BBOalert 6.6.1.6<br>Reading data<br><br>109 records from cache</p>
+  </div>
+  <div id="adpanel2"
+    style="height: 100%; width: 100%; background-color: rgb(211, 211, 211); display: none; z-index: 5000; overflow: hidden auto;">
+    <button value="undefined"
+      style="background-color: white; text-align: center; display: inline; font-size: 20px; width: 33%;">⌫
+      Char</button><button value="undefined"
+      style="background-color: white; text-align: center; display: inline; font-size: 20px; width: 33%;">⌫
+      Word</button><button value="undefined"
+      style="background-color: white; text-align: center; display: inline; font-size: 20px; width: 34%;">⌫
+      All</button><button value="%redisplayBiddingBox%"
+      style="background-color: white; text-align: center; display: inline; font-size: 20px; width: 25%;">rbb</button>
+  </div>
+  <div id="adpanel3" style="height: 100%; width: 100%; background-color: white; display: none; overflow: hidden auto;">
+    <select id="bboalert-is" style="width: 100%; font-size: 18px; background-color: palegreen;">
+      <option
+        value="https://docs.google.com/document/d/e/2PACX-1vQ_8Iv9HbBj4nWDXSY_kHsW1ZP_4c4dbOVO0GLuObJc1vFu_TBg9oV6ZJXMWd_tLITOj7i6WaJBeZJI/pub">
+        Release Notes</option>
+    </select><iframe
+      src="https://docs.google.com/document/d/e/2PACX-1vQ_8Iv9HbBj4nWDXSY_kHsW1ZP_4c4dbOVO0GLuObJc1vFu_TBg9oV6ZJXMWd_tLITOj7i6WaJBeZJI/pub"
+      id="bboalert-relnotes" style="height: 100%; width: 100%;"></iframe></div>
+</div>
 
 </body>
 
