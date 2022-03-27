@@ -16,21 +16,11 @@
     <pre><code id='code-result'></code></pre>
 
     <script>
-
         function handelSubmit() {
             let code = document.getElementById('code').value;
-            document.getElementById('targetFrame')
-                .contentWindow.postMessage(code, '*')
-
-        };
-        window.addEventListener('message', event => {
-            let codeResult = document.getElementById('code-result');
-            if (event.origin === "null"
-                || (event.origin === (window.location.protocol + "//" + window.location.host)
-                    && eevent.source === unsandboxedFrame.contentWindow)) {
-                codeResult.innerHTML = event.data
-            }
-        });
+            eval(code);
+            console.log(camel);
+        }
     </script>
 
 </body>
