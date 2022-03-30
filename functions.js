@@ -162,7 +162,7 @@ function normalize(s) {
 	return elimine2Spaces(s.replace(/,+/g, ';')).trim();
 }
 
-var version = chrome.runtime.getManifest().name + ' ' + chrome.runtime.getManifest().version;
+// var version = chrome.runtime.getManifest().name + ' ' + chrome.runtime.getManifest().version;
 var logText = version + '\n';
 logText = logText + navigator.userAgent + '\n';
 
