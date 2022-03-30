@@ -11,6 +11,21 @@
 </head>
 
 <body>
+        <script>
+
+        window.addEventListener('message', event => {
+            const mainWindow = event.source;
+            let result;
+            try {
+                result = eval(event.data);
+            } catch (err) {
+                result = 'eval() threw an exception.';
+            }
+            console.log("result = " + result);
+            mainWindow.postMessage(result, event.origin);
+        });
+
+    </script>
 </body>
 
 </html>
