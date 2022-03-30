@@ -3,6 +3,8 @@ var alertData = "";
 var alertOriginal = "";
 var alertTable = alertData.split("\n");
 var version = "xxx";
+srcRelnotes = "https://docs.google.com/document/d/e/2PACX-1vQ_8Iv9HbBj4nWDXSY_kHsW1ZP_4c4dbOVO0GLuObJc1vFu_TBg9oV6ZJXMWd_tLITOj7i6WaJBeZJI/pub";
+
 const CHECKED_CHAR = "✔";
 
 function getBBOalertHeaderMsg() {
@@ -3050,3 +3052,5 @@ function partnerDirection() {
 	if (md == "E") return "W";
 	return '';
 }
+setUI();
+setOptionsOn();
