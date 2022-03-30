@@ -2,6 +2,7 @@
 var alertData = "";
 var alertOriginal = "";
 var alertTable = alertData.split("\n");
+var version = "xxx";
 const CHECKED_CHAR = "✔";
 
 function getBBOalertHeaderMsg() {
@@ -163,7 +164,6 @@ function normalize(s) {
 }
 
 // var version = chrome.runtime.getManifest().name + ' ' + chrome.runtime.getManifest().version;
-version = "xxx";
 var logText = version + '\n';
 logText = logText + navigator.userAgent + '\n';
 
