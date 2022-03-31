@@ -22,9 +22,8 @@
         window.addEventListener('message', event => {
             const mainWindow = event.source;
             var data = event.data;
-            console.log("event.data  = " + event.data);
-//            console.log("data.id  = " + data.id);
-//            console.log("data.msg = " + data.msg);
+            console.log("data.id  = " + data.id);
+            console.log("data.msg = " + data.msg);
             var result;
             try {
                 result = eval(data.msg);
