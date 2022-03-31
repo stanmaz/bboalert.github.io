@@ -30,7 +30,7 @@
             } catch (err) {
                 result = 'eval() threw an exception.';
             }
-            data.msg = result;
+            data.result = result;
             console.log("result = " + result);
             mainWindow.postMessage(data, event.origin);
         });
