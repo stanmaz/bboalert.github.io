@@ -22,11 +22,11 @@
         window.addEventListener('message', event => {
             const mainWindow = event.source;
             var data = event.data;
-            console.log("data.id  = " + data.id);
-            console.log("data.msg = " + data.msg);
+            console.log("data.id     = " + data.id);
+            console.log("data.script = " + data.script);
             var result;
             try {
-                result = eval(data.msg);
+                result = eval(data.script);
             } catch (err) {
                 result = 'eval() threw an exception.';
             }
