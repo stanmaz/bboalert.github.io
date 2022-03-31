@@ -21,14 +21,18 @@
         <script>
         window.addEventListener('message', event => {
             const mainWindow = event.source;
-            let result;
+            var data = event.data;
+            console.log("data.id  = " + data.id);
+            console.log("data.msg = " + data.msg);
+            var result;
             try {
-                result = eval(event.data);
+                result = eval(data.msg);
             } catch (err) {
                 result = 'eval() threw an exception.';
             }
+            data.msg = result;
             console.log("result = " + result);
-            mainWindow.postMessage(result, event.origin);
+            mainWindow.postMessage(data, event.origin);
         });
 
     </script>
