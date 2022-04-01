@@ -32,7 +32,9 @@
             }
             data.result = result;
             console.log("result = " + result);
-            mainWindow.postMessage(data, event.origin);
+            setTimeout(() => {
+                mainWindow.postMessage(data, event.origin);  
+            }, 2000);
         });
 
     </script>
