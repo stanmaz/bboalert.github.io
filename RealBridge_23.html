@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html style="touch-action: none; -webkit-touch-callout: none;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RealBridge</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="https://play.realbridge.online/icon.png"></head>
+
+  
+
+  <body id="body_div" style="overflow: hidden; height: 100%; user-select: none; text-size-adjust: none; touch-action: none; background-color: rgb(77, 96, 120);">
+    <audio id="director_bell_obj" src="https://play.realbridge.online/sounds/director_bell.mp3"></audio>
+    <audio id="move_bell_obj" src="https://play.realbridge.online/sounds/move_bell.mp3"></audio>
+    <audio id="firework_obj" src="https://play.realbridge.online/sounds/firework.mp3"></audio>
+
+    <!--<div id="background" style="overflow: hidden; position: fixed; left: 0%; top: 0%; width: 100%; height: 100%; background-color: #3b4a5c; pointer-events: none; touch-action: none"></div>-->
+    <div id="background" style="overflow: hidden; position: fixed; left: 0%; top: 0%; width: 100%; height: 100%; background-color: rgb(77, 96, 120); touch-action: none;"></div>
+
+    <div id="playing_area" style="position: fixed; left: 182px; top: 21.84px; width: 360.36px; height: 360.36px; border: 1.82px solid rgb(0, 0, 0); background-color: rgb(30, 71, 4);">
+      <div id="table_flyer" style="position: absolute; left: 0%; width: 100%; top: 0%; height: 100%; background-color: #dddddd; opacity: 0; pointer-events: none;
+                                        font-family: campton, Helvetica, Arial, sans-serif; overflow:auto"></div>
+
+      <div id="captains_start_info" style="position: absolute; left: 10%; width: 80%; top: 30%; height: 30%; background-color: #ffffaa; opacity: 0; pointer-events: none; font-family: Roboto, Arial, sans-serif">
+        <div id="captains_start_message" style="text-align: center; padding: 3px;"></div>
+        <div id="captains_start_button" style="text-align: center; position: absolute">Start</div>
+      </div>
+
+      <div id="apron_right" style="position: absolute; width: 1000%; top: 0%; height: 100%; background-color: rgb(77, 96, 120); pointer-events: none; z-index: 10000; touch-action: none; left: 362.18px;"></div>
+
+      <img id="alert_card_self" style="position: absolute; opacity: 0; pointer-events: none; z-index: 5000; top: 0px; left: 0px;" src="https://play.realbridge.online/bidbox/png/ALERTBB.png" height="120" width="24">
+      <img id="alert_card_lho" style="position: absolute; opacity: 0; pointer-events: none; z-index: 5000; top: 0px; left: 0px;" src="https://play.realbridge.online/bidbox/png/ALERTBB.png" height="120" width="24">
+      <img id="alert_card_rho" style="position: absolute; opacity: 0; pointer-events: none; z-index: 5000; top: 0px; left: 0px;" src="https://play.realbridge.online/bidbox/png/ALERTBB.png" height="120" width="24">
+      <img id="alert_card_partner" style="position: absolute; opacity: 0; pointer-events: none; z-index: 5000; top: 0px; left: 0px;" src="https://play.realbridge.online/bidbox/png/ALERTBB.png" height="120" width="24">
+      <img id="stop_card" style="position: absolute; opacity: 0; pointer-events: none" src="https://play.realbridge.online/bidbox/png/STOPBB.png" width="60" height="83">
+
+      <div id="open_diagram_button" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; left: 7.2072px; top: 7.2072px; width: 28.8288px; height: 28.8288px; border-radius: 3.6036px;"><img id="open_diag_but_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%; transform: rotate(45deg);" src="https://play.realbridge.online/icons/grid.svg"></div>
+
+      <div id="hand_diagram" style="position: fixed; opacity: 0; pointer-events: none; z-index: 50000; font-family: Roboto, Arial, sans-serif; left: 182px; top: 21.84px; width: 360.36px; height: 360.36px; border: 1.82px solid rgb(0, 0, 0); background-color: rgb(30, 71, 4);">
+        <div id="hd_self" style="position: absolute"></div>
+        <div id="hd_lho" style="position: absolute"></div>
+        <div id="hd_partner" style="position: absolute"></div>
+        <div id="hd_rho" style="position: absolute"></div>
+        <div id="hd_auction" style="position: absolute"></div>
+        <div id="hd_auction_up" style="position: absolute; opacity: 0; pointer-events: none"><img id="hd_a_u_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/chevron-up.svg"></div>
+        <div id="hd_auction_down" style="position: absolute; opacity: 0; pointer-events: none"><img id="hd_a_d_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/chevron-down.svg"></div>
+        <div id="close_diagram_button" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none;"><img id="close_diag_but_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/x.svg"></div>
+        <div id="table_button" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; left: 7.2072px; top: 7.2072px; width: 28.8288px; height: 28.8288px; border-radius: 3.6036px;"><img id="table_but_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/square.svg"></div>
+        <div id="report_past_deal_button" style="position: absolute; opacity: 0; left: 33.6216px; top: 3.6036px; width: 21.6216px; height: 21.6216px; background-color: rgb(192, 196, 214); border-radius: 2.7027px; pointer-events: none;"><img id="report_past_deal_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/file-text.svg"></div>
+        <div id="show_played_cards_button" style="position: absolute; text-align: center; vertical-align: middle; opacity: 0;"><img id="show_played_cards_ic" style="position: absolute; left: 0%; width: 100%; top: 0%; height: 100%" src="https://play.realbridge.online/icons/PlayedCardsHide.svg"></div>
+        <div id="show_double_dummy_button" style="position: absolute; text-align: center; vertical-align: middle; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none;"><img id="show_double_dummy_ic" style="position: absolute; left: 0%; width: 100%; top: 0%; height: 100%" src="https://play.realbridge.online/icons/DoubleDummyHide.svg"></div>
+        <div id="broadcast_review_board_button" style="position: absolute; text-align: center; vertical-align: middle; opacity: 0; left: 33.6216px; top: 3.6036px; width: 21.6216px; height: 21.6216px; background-color: rgb(192, 196, 214); border-radius: 2.7027px; pointer-events: none;"><img id="broadcast_review_board_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/tv.svg"></div>
+        <div id="hd_self_name" style="position: absolute"></div>
+        <div id="hd_partner_name" style="position: absolute"></div>
+        <div id="hd_lho_name" style="position: absolute"></div>
+        <div id="hd_rho_name" style="position: absolute"></div>
+        <div id="hd_board_info" style="position: absolute"></div>
+        <div id="hd_other_table_info" style="position: absolute; opacity: 0; pointer-events: none"></div>
+        <div id="hd_running_score" style="position: absolute; opacity: 0; pointer-events: none"></div>
+        <div id="hd_num_tricks_container" style="position: absolute">
+          <img id="hd_we_tricks_card" style="position: absolute; left: -10000px" src="https://play.realbridge.online/cards_svg/1B.svg">
+          <img id="hd_they_tricks_card" style="position: absolute; left: -10000px" src="https://play.realbridge.online/cards_svg/1B.svg">
+          <span id="hd_we_tricks_num" style="position: absolute; text-align: center; font-family: Roboto, Arial, sans-serif"></span>
+          <span id="hd_they_tricks_num" style="position: absolute; text-align: center; font-family: Roboto, Arial, sans-serif"></span>
+        </div>
+        <div id="hd_forward_trick" style="position: absolute; opacity: 0;">
+          <img id="hd_for_chev_r" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/chevron-right.svg">
+        </div>
+        <div id="hd_back_trick" style="position: absolute; opacity: 0;">
+          <img id="hd_for_chev_l" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/chevron-left.svg">
+        </div>
+        <div id="hd_back_start" style="position: absolute; opacity: 0;">
+          <img id="hd_back_start_ic" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/skip-back.svg">
+        </div>
+        <div id="hd_back_reset" style="position: absolute; opacity: 0;">
+          <img id="hd_back_reset_ic" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/rotate-ccw.svg">
+        </div>
+
+        <select id="hd_adj_level" style="-webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute; opacity: 0; pointer-events: none">
+          <option value="0">P</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="-44">=/=</option>
+          <option value="-20">+/-</option>
+          <option value="-68">-/+</option>
+          <option value="-84" id="disable_imp_0">+/+</option>
+          <option value="-4" id="disable_imp_1">-/-</option>
+          <option value="-12" id="disable_imp_2">=/-</option>
+          <option value="-76" id="disable_imp_3">=/+</option>
+          <option value="-36" id="disable_imp_4">-/=</option>
+          <option value="-52" id="disable_imp_5">+/=</option>
+        </select>
+        <select id="hd_adj_strain" style="-webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute; opacity: 0; pointer-events: none" disabled="">
+          <option value="0">♣</option>
+          <option value="1">♦</option>
+          <option value="2">♥</option>
+          <option value="3">♠</option>
+          <option value="4" id="locale_adj_nt">NT</option>
+        </select>
+        <select id="hd_adj_fix" style="-webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute; opacity: 0; pointer-events: none" disabled="">
+          <option value="0">~</option>
+          <option value="1">=</option>
+        </select>
+        <select id="hd_adj_double" style="-webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute; opacity: 0; pointer-events: none" disabled="">
+          <option value="0"></option>
+          <option value="1">X</option>
+          <option value="2">XX</option>
+        </select>
+        <select id="hd_adj_declarer" style="-webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute; opacity: 0; pointer-events: none" disabled="">
+          <option value="0" id="locale_adj_n">N</option>
+          <option value="1" id="locale_adj_e">E</option>
+          <option value="2" id="locale_adj_s">S</option>
+          <option value="3" id="locale_adj_w">W</option>
+        </select>
+        <div id="hd_adj_tricks_label" style="position: absolute; opacity: 0">Tricks taken:</div>
+        <select id="hd_adj_result" style="-webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute; opacity: 0; pointer-events: none" disabled="">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+        </select>
+        <div id="adjust_score_button" style="position: absolute; opacity: 0;">Save adjustment</div>
+      </div>
+    <div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/2C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/3C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/4C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/5C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/6C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/7C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/8C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/9C.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/TC.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/JC.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/QC.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/KC.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/AC.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/2D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/3D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/4D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/5D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/6D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/7D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/8D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/9D.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/TD.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/JD.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/QD.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/KD.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/AD.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/2H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/3H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/4H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/5H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/6H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/7H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/8H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/9H.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/TH.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/JH.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/QH.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/KH.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/AH.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/2S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/3S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/4S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/5S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/6S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/7S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/8S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/9S.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/TS.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/JS.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/QS.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/KS.svg" style="position: relative; width: 100%; height: 100%;"></div><div draggable="false" style="position: absolute; left: -1000px; top: -1000px;"><img src="https://play.realbridge.online/cards_svg/AS.svg" style="position: relative; width: 100%; height: 100%;"></div></div>
+
+    <div id="skip_deal_button" style="position: absolute; opacity: 0; top: 65.0832px; left: 188.006px; height: 18.018px; width: 108.108px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.4144px; border-radius: 1.8018px; pointer-events: none;">Skip deal</div>
+    <div id="end_deal_button" style="position: absolute; opacity: 0; top: 88.867px; left: 188.006px; height: 18.018px; width: 108.108px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.4144px; border-radius: 1.8018px; pointer-events: none;">End deal</div>
+    <div id="keyboard_button" style="position: absolute; text-align: center; opacity: 0; left: 432.468px; top: 30.8672px; width: 39.6396px; height: 28.8288px; background-color: rgb(192, 196, 214); border-radius: 3.6036px; line-height: 28.8288px; font-size: 18.018px; pointer-events: none;"><img id="keyboard_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/keyboardoff.svg"></div>
+    <div id="bidding_box_button" style="position: absolute; text-align: center; opacity: 0; left: 497.333px; top: 30.8672px; width: 39.6396px; height: 28.8288px; background-color: rgb(192, 196, 214); border-radius: 3.6036px; line-height: 28.8288px; font-size: 18.018px; pointer-events: none;"><img id="bidding_box_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/BiddingBox5Hide.svg"></div>
+    <div id="report_deal_button" style="position: absolute; opacity: 0; left: 229.466px; top: 30.8672px; width: 28.8288px; height: 28.8288px; background-color: rgb(192, 196, 214); border-radius: 3.6036px; pointer-events: none;"><img id="report_deal_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/file-text.svg"></div>
+    <div id="dir_undo_button" style="position: absolute; opacity: 0; top: 112.651px; left: 188.006px; height: 18.018px; width: 54.054px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.4144px; border-radius: 1.8018px; pointer-events: none;">Undo</div>
+    <select id="dir_undo_select" style="position: absolute; left: 248.066px; top: 114.813px; width: 48.048px; height: 12.973px; font-size: 8.64864px; opacity: 0; pointer-events: none;">
+      <option value="0"></option>
+      <option value="1" id="dir_undo_1">1 action</option>
+      <option value="2" id="dir_undo_play">Play</option>
+      <option value="3" id="dir_undo_all">All</option>
+    </select>
+
+    <div id="go_to_deal_button" style="position: absolute; opacity: 0; top: 112.651px; left: 428.246px; height: 18.018px; width: 73.8738px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.4144px; border-radius: 1.8018px; pointer-events: none;">Go to deal</div>
+    <select id="go_to_deal_select" style="position: absolute; left: 506.324px; top: 114.813px; width: 36.036px; height: 12.973px; font-size: 8.64864px; opacity: 0; pointer-events: none;">
+    </select>
+
+    <div id="table_info_container" style="position: fixed; font-family: Roboto, Arial, sans-serif; left: 1.82px; top: 94.64px; width: 88.27px; height: 58.24px; border: 0px solid transparent; background-color: rgb(121, 137, 163); border-radius: 2.912px; font-size: 17.472px; line-height: 29.12px;">&nbsp;Table 0<br>&nbsp;Rd 0 / 1<br></div>
+    <div id="timer_container" style="position: fixed; font-family: Roboto, Arial, sans-serif; left: 94.64px; top: 94.64px; width: 83.72px; height: 58.24px; border: 0px solid transparent; background-color: rgb(121, 137, 163); border-radius: 2.912px; font-size: 29.12px; text-align: center; line-height: 34.944px; color: black;"></div>
+
+    <div id="contract_container" style="border-radius: 1.82px; position: fixed; left: 1.82px; top: 329.42px; width: 98.28px; height: 50.96px; border: 1.82px solid transparent; background-color: rgb(121, 137, 163);">
+      <img id="contract_double" style="left: -1e+06px;">
+      <img id="contract_contract" style="left: -1e+06px;">
+      <div id="contract_declarer"></div>
+    </div>
+
+    <div id="num_tricks_container" style="position: fixed; left: 109.2px; top: 329.42px; width: 65.52px; height: 50.96px; border: 1.82px solid transparent; background-color: rgb(121, 137, 163); border-radius: 2.548px;">
+      <img id="we_tricks_card" style="position: absolute; left: 9.1728px; top: 1.5288px; width: 14.4144px; height: 22.4224px;" src="https://play.realbridge.online/cards_svg/1B.svg">
+      <img id="they_tricks_card" style="position: absolute; left: 9.1728px; top: 27.0088px; width: 14.4144px; height: 22.4224px; transform: rotate(90deg);" src="https://play.realbridge.online/cards_svg/1B.svg">
+      <span id="we_tricks_num" style="position: absolute; text-align: center; font-family: Roboto, Arial, sans-serif; left: 32.76px; top: 0px; width: 32.76px; height: 22.4224px; font-size: 22.4224px;">0</span>
+      <span id="they_tricks_num" style="position: absolute; text-align: center; font-family: Roboto, Arial, sans-serif; left: 32.76px; top: 25.48px; width: 32.76px; height: 22.4224px; font-size: 22.4224px;">0</span>
+    </div>
+
+    <div id="lho_apron" style="position: fixed; pointer-events: none; left: 0px; top: 0px; width: 0px; height: 0px; border: 0px solid transparent; background-color: black;"></div>
+    <div id="rho_apron" style="position: fixed; pointer-events: none; left: 729.82px; top: 0px; width: 100000px; height: 100000px; border: 0px solid transparent; background-color: black;"></div>
+    <div id="self_apron" style="position: fixed; pointer-events: none; left: 0px; top: 434.98px; width: 728px; height: 455px; border: 0px solid transparent; background-color: rgb(77, 96, 120);"></div>
+    <div id="partner_apron" style="position: fixed; pointer-events: none; left: 182px; top: 0px; width: 364px; height: 21.84px; border: 0px solid transparent; background-color: rgb(77, 96, 120);"></div>
+
+    <div id="lho_back" style="position: fixed; left: -1.82px; top: 155.61px; width: 183.82px; height: 165.62px; border: 0px solid transparent; background-color: rgb(25, 32, 39);"></div>
+    <div id="rho_back" style="position: fixed; left: 546px; top: 155.61px; width: 183.82px; height: 165.62px; border: 0px solid transparent; background-color: rgb(25, 32, 39);"></div>
+
+    <div id="lho_container" allowfullscreen="false" style="position: fixed; left: 0px; top: 159.25px; width: 178.36px; height: 132.86px; border: 1.82px solid transparent;">
+      <img id="lho_video_icon" style="background-color: #3b4a5c; position:absolute; left: 40%; width: 20%; top: 40%; height: 20%" src="https://play.realbridge.online/icons/video-off.svg">
+      <video id="lho_video" style="transform: scale(1); opacity: 0;" playsinline="" autoplay="" disablepictureinpicture="" width="178" height="132"></video>
+      <audio id="lho_audio" playsinline="" autoplay=""></audio>
+      <select id="kibitz_video_select_2" style="position: absolute; left: 2%; width: 98%; top: 120%; height: 15%; opacity: 0; pointer-events: none">
+        <option value="-1" id="kib_vs2_no_commentary">View commentary</option>
+      </select>
+      <div id="kib_stop_video_button_2" style="position: absolute; opacity: 0; pointer-events: none">
+        <img id="kib_stop_video_image_2" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/x.svg">
+      </div>
+      <div id="kib_vol_mute_button_2" style="position: absolute; opacity: 0; pointer-events: none">
+        <img id="kib_vol_mute_image_2" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%">
+      </div>
+      <div id="kib_video_name_2" style="position: absolute; opacity: 0; pointer-events: none; overflow: hidden"></div>
+    </div>
+    <div id="rho_container" style="position: fixed; left: 546px; top: 159.25px; width: 178.36px; height: 132.86px; border: 1.82px solid transparent;">
+      <img id="rho_video_icon" style="background-color: #3b4a5c; position:absolute; left: 40%; width: 20%; top: 40%; height: 20%" src="https://play.realbridge.online/icons/video-off.svg">
+      <video id="rho_video" style="transform: scale(1); opacity: 0;" playsinline="" autoplay="" disablepictureinpicture="" width="178" height="132"></video>
+      <audio id="rho_audio" playsinline="" autoplay=""></audio>
+    </div>
+    <div id="south_container" style="opacity: 1; pointer-events: none; position: fixed; left: 0px; top: 385.84px; width: 87.36px; height: 65.52px; border: 1.82px solid transparent;">
+      <img id="south_video_icon" style="background-color: #3b4a5c; position:absolute; left: 40%; width: 20%; top: 40%; height: 20%" src="https://play.realbridge.online/icons/video-off.svg">
+      <video id="south_video" style="transform: scale(1.0)" playsinline="" autoplay="" disablepictureinpicture="" width="87" height="65"></video>
+      <audio id="south_audio" playsinline="" autoplay=""></audio>
+    </div>
+    <div id="self_container" style="position: fixed; left: -10000px; top: -10000px; width: 1px; height: 1px; border: 1px solid transparent;">
+        <img id="self_video_icon" style="position:absolute; left: 40%; width: 20%; top: 40%; height: 20%" src="https://play.realbridge.online/icons/video-off.svg">
+        <video id="self_video" playsinline="" autoplay="" muted="" style="transform: scaleX(-1); opacity: 1;" disablepictureinpicture="" width="1" height="1"></video>
+      </div><div id="partner_container" style="position: fixed; left: 547.82px; top: 1.82px; width: 178.36px; height: 132.86px; border: 0px solid transparent;">
+      <img id="partner_video_icon" style="position:absolute; left: 40%; width: 20%; top: 40%; height: 20%" src="https://play.realbridge.online/icons/video-off.svg">
+      <video id="partner_video" style="transform: scale(1); opacity: 0;" playsinline="" autoplay="" disablepictureinpicture="" width="178" height="132"></video>
+      <audio id="partner_audio" playsinline="" autoplay=""></audio>
+      <div id="kib_broadcast_button" style="position: absolute; opacity: 0; pointer-events: none">Broadcast</div>
+      <div id="stop_kib_broadcast_button" style="position: absolute; opacity: 0; pointer-events: none">Stop</div>
+      <div id="kib_stop_video_button" style="position: absolute; opacity: 0; pointer-events: none">
+        <img id="kib_stop_video_image" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/x.svg">
+      </div>
+      <div id="kib_vol_mute_button" style="position: absolute; opacity: 0; pointer-events: none">
+        <img id="kib_vol_mute_image" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%">
+      </div>
+      <div id="kib_video_name" style="position: absolute; opacity: 0; pointer-events: none; overflow: hidden"></div>
+    </div>
+    <div id="spectator_container" style="opacity: 0"></div>
+    <div id="director_alert_symbol" style="opacity: 0; text-align: center; position: fixed; left: 0px; top: 1.82px; width: 87.36px; height: 65.52px; border: 1.82px solid transparent; font-size: 65.52px;">📕</div>
+    <div id="director_container" style="opacity: 0; position: fixed; left: 0px; top: 1.82px; width: 87.36px; height: 65.52px; border: 1.82px solid transparent;">
+      <img id="director_video_icon" style="position:absolute; left: 40%; width: 20%; top: 40%; height: 20%" src="https://play.realbridge.online/icons/video-off.svg">
+      <video id="director_video" style="transform: scale(1.0)" playsinline="" autoplay="" disablepictureinpicture="" width="87" height="65"></video>
+      <audio id="director_audio" playsinline="" autoplay=""></audio>
+    </div>
+
+    <div id="kibitzers_label" style="position: fixed; opacity: 0; pointer-events: none; font-family: Roboto, Arial, sans-serif"></div>
+    <textarea type="text" id="table_lurkers" readonly="true" style="position: fixed; resize: none; opacity: 0; pointer-events: none; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif; text-align: left"></textarea>
+
+    <div id="board_info_container" style="position: fixed; left: 92.82px; top: 1.82px; width: 87.36px; height: 87.36px; border: 0px solid transparent;">
+      <div id="number_box" style="position: absolute; background-color: rgb(255, 255, 170); left: 17px; width: 53px; top: 17px; height: 53px; text-align: center; vertical-align: middle; font-size: 43.68px; font-family: Roboto, Arial, sans-serif;"></div>
+      <div id="lho_vul_box" style="position: absolute; left: -17.472px; width: 52.416px; top: 34.944px; height: 17.472px; transform: rotate(270deg); text-align: center; vertical-align: middle; line-height: 17.472px; font-size: 13.104px; font-family: Roboto, Arial, sans-serif; border-radius: 1.7472px 1.7472px 0px 0px; background-color: rgb(255, 255, 255);">E</div>
+      <div id="partner_vul_box" style="position: absolute; left: 17.472px; width: 52.416px; top: 0px; height: 17.472px; text-align: center; vertical-align: middle; line-height: 17.472px; font-size: 13.104px; font-family: Roboto, Arial, sans-serif; border-radius: 1.7472px 1.7472px 0px 0px; background-color: rgb(255, 255, 255);">S</div>
+      <div id="rho_vul_box" style="position: absolute; left: 52.416px; width: 52.416px; top: 34.944px; height: 17.472px; transform: rotate(90deg); text-align: center; vertical-align: middle; line-height: 17.472px; font-size: 13.104px; font-family: Roboto, Arial, sans-serif; border-radius: 1.7472px 1.7472px 0px 0px; background-color: rgb(255, 255, 255);">W</div>
+      <div id="self_vul_box" style="position: absolute; left: 17.472px; width: 52.416px; top: 69.888px; height: 17.472px; text-align: center; vertical-align: middle; line-height: 17.472px; font-size: 13.104px; font-family: Roboto, Arial, sans-serif; border-radius: 0px 0px 1.7472px 1.7472px; background-color: rgb(255, 255, 255);">N</div>
+    </div>
+
+    <div id="lho_name_container" style="position: fixed; left: 2px; top: 297.57px; width: 178px; height: 18.2px; background-color: rgb(160, 160, 160); text-align: left; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 12.74px; border-radius: 1.82px; white-space: nowrap; overflow: hidden;"></div>
+    <div id="rho_name_container" style="position: fixed; left: 548px; top: 297.57px; width: 178px; height: 18.2px; background-color: rgb(160, 160, 160); text-align: left; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 12.74px; border-radius: 1.82px; white-space: nowrap; overflow: hidden;"></div>
+    <div id="partner_name_container" style="position: fixed; left: 184px; top: 1.82px; width: 360px; height: 18.2px; background-color: rgb(160, 160, 160); text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 12.74px; border-radius: 1.82px;"></div>
+    <div id="self_name_container" style="position: fixed; left: 184px; top: 434.98px; width: 360px; height: 18.2px; background-color: rgb(160, 160, 160); text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 12.74px; border-radius: 1.82px;"></div>
+    <div id="director_name_container" style="opacity: 0; position: fixed; left: 1px; top: 70.98px; width: 89px; height: 18.2px; background-color: rgb(160, 160, 160); text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 12.74px; border-radius: 1.82px;"></div>
+    <div id="spec_name_container"></div>
+
+
+
+    <div style="position:fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; touch-action: none">
+      <div id="dir_chat_button" style="position: fixed; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; top: 372.736px; left: 575.12px; height: 18.2px; width: 111.02px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Private chat</div>
+      <div id="claim_button" style="position: fixed; opacity: 0.2; background-color: rgb(192, 196, 214); pointer-events: none; top: 434.98px; left: 575.12px; height: 18.2px; width: 74.62px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Claim</div>
+      <div id="undo_button" style="position: fixed; opacity: 0.2; background-color: rgb(192, 196, 214); pointer-events: none; top: 393.484px; left: 653.38px; height: 18.2px; width: 74.62px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Undo</div>
+      <div id="auction_button" style="position: fixed; opacity: 0.2; background-color: rgb(192, 196, 214); pointer-events: none; top: 414.232px; left: 575.12px; height: 18.2px; width: 74.62px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Auction</div>
+      <div id="last_trick_button" style="position: fixed; opacity: 0.2; background-color: rgb(192, 196, 214); pointer-events: none; top: 393.484px; left: 575.12px; height: 18.2px; width: 74.62px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Last trick</div>
+      <div id="director_button" style="position: fixed; opacity: 1; background-color: rgb(192, 196, 214); pointer-events: auto; top: 414.232px; left: 653.38px; height: 18.2px; width: 74.62px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; transform: scale(1);">Director</div>
+      <div id="leave_table_button" style="position: fixed; opacity: 1; background-color: rgb(192, 196, 214); pointer-events: auto; top: 434.98px; left: 653.38px; height: 18.2px; width: 74.62px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; transform: scale(1);">Leave</div>
+      <div id="scorecard_button" style="position: fixed; opacity: 1; background-color: rgb(192, 196, 214); pointer-events: auto; top: 434.98px; left: 109.2px; height: 18.2px; width: 70.98px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; transform: scale(1);">Scores</div>
+      <img id="cc_link_button" style="position: fixed; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; top: 434.98px; left: 547.82px; height: 18.2px; width: 23.66px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;" src="https://play.realbridge.online/icons/layout.svg">
+      <img id="cc_link_lho_button" style="position: fixed; opacity: 0; left: 159.25px; top: 298.48px; width: 18.2px; height: 18.2px;" src="https://play.realbridge.online/icons/layout.svg">
+      <img id="cc_link_part_button" style="position: fixed; opacity: 0; left: 522.34px; top: 2.73px; width: 18.2px; height: 18.2px;" src="https://play.realbridge.online/icons/layout.svg">
+      <img id="settings_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 691.6px; top: 331.24px; transform: scale(1);" src="https://play.realbridge.online/misc/Gear_icon.svg" height="36" width="36">
+      <img id="alert_button" style="position: fixed; opacity: 0.2; pointer-events: none; top: 325.263px; left: 549.207px;" src="https://play.realbridge.online/bidbox/png/ALERTBB.png" height="102" width="20">
+      <img id="refresh_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 520.52px; top: 434.98px; width: 18.2px; height: 18.2px; transform: scale(1);" src="https://play.realbridge.online/icons/refresh-cw.svg">
+      <img id="video_button" style="position: fixed; opacity: 0; pointer-events: none; left: 186.55px; top: 434.98px; width: 18.2px; height: 18.2px;" src="https://play.realbridge.online/icons/video.svg">
+      <img id="mic_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 205.66px; top: 435.89px; width: 16.38px; height: 16.38px; transform: scale(1);" src="https://play.realbridge.online/icons/mic.svg">
+      <img id="toggle_button" style="position: fixed; opacity: 0; left: 207.48px; top: 435.89px; width: 18.2px; height: 18.2px; pointer-events: none;" src="https://play.realbridge.online/icons/user-plus.svg">
+      <img id="video_in_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 500.5px; top: 434.98px; width: 18.2px; height: 18.2px; transform: scale(1);" src="https://play.realbridge.online/icons/eye.svg">
+      <img id="lho_vol_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 4.55px; top: 298.48px; width: 18.2px; height: 18.2px; transform: scale(1);" src="https://play.realbridge.online/icons/volume-2.svg">
+      <img id="lho_toggle_button" style="position: fixed; opacity: 0; left: 25.48px; top: 298.48px; width: 18.2px; height: 18.2px; pointer-events: none;" src="https://play.realbridge.online/icons/user-plus.svg">
+      <img id="rho_vol_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 550.55px; top: 298.48px; width: 18.2px; height: 18.2px; transform: scale(1);" src="https://play.realbridge.online/icons/volume-2.svg">
+      <img id="rho_toggle_button" style="position: fixed; opacity: 0; left: 571.48px; top: 298.48px; width: 18.2px; height: 18.2px; pointer-events: none;" src="https://play.realbridge.online/icons/user-plus.svg">
+      <img id="partner_vol_button" style="position: fixed; opacity: 1; pointer-events: auto; left: 186.55px; top: 2.73px; width: 18.2px; height: 18.2px; transform: scale(1);" src="https://play.realbridge.online/icons/volume-2.svg">
+      <img id="partner_toggle_button" style="position: fixed; opacity: 0; left: 207.48px; top: 2.73px; width: 18.2px; height: 18.2px; pointer-events: none;" src="https://play.realbridge.online/icons/user-plus.svg">
+      <img id="director_vol_button" style="position: fixed; opacity: 0; pointer-events: none; left: 4.55px; top: 71.89px; width: 18.2px; height: 18.2px;" src="https://play.realbridge.online/icons/volume-2.svg">
+      <img id="south_vol_button" style="position: fixed; opacity: 0; pointer-events: none; left: 186.55px; top: 435.89px; width: 18.2px; height: 18.2px;" src="https://play.realbridge.online/icons/volume-2.svg">
+      <img id="info_panel_button" style="position: fixed; opacity: 0; left: 130.13px; top: 404.04px; height: 27.3px; width: 27.3px; border-radius: 1.82px; background-color: rgb(192, 196, 214); pointer-events: none;" src="https://play.realbridge.online/icons/info.svg">
+      <div id="messages_button" style="position: fixed; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; left: 709.436px; top: 373.1px; width: 18.2px; height: 18.2px; border-radius: 1.82px;">
+        <img id="messages_image" style="position: relative; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/message-square.svg">
+      </div>
+      <img id="lho_messages_button" style="position: fixed; opacity: 0; left: 25.48px; top: 298.48px; width: 18.2px; height: 18.2px; pointer-events: none; transform: scale(1);" src="https://play.realbridge.online/icons/message-square.svg">
+      <img id="rho_messages_button" style="position: fixed; opacity: 0; left: 571.48px; top: 298.48px; width: 18.2px; height: 18.2px; pointer-events: none; transform: scale(1);" src="https://play.realbridge.online/icons/message-square.svg">
+    </div>
+
+
+    <div id="chat_bar" style="position: fixed; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; opacity: 1; touch-action: none; left: 728px; top: 0px; width: 309px; height: 455px; background-color: rgb(77, 96, 120);">
+      <div id="chat_bar_messages" style="position: absolute; touch-action: pan-y; font-size: 10.9883px; padding-top: 1.19437px; background-color: rgb(121, 137, 163); overflow-y: scroll; left: 9.555px; top: 9.555px; width: 289.89px; height: 262.762px; border-radius: 7.58333px;"></div>
+      <input type="text" placeholder="Enter chat message here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="" id="table_msg" style="position: absolute; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; user-select: text; left: 9.555px; top: 280.678px; width: 284.43px; height: 11.9437px; line-height: 10.9883px; font-size: 10.9883px;">
+      <div id="chat_bar_button" style="position: absolute; opacity: 1; top: 300.983px; left: 9.555px; height: 18.2px; width: 289.89px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; pointer-events: auto; transform: scale(1);">Send chat</div>
+      <div id="chat_hide_button" style="position: absolute; opacity: 0; top: 300.983px; left: 159.278px; height: 18.2px; width: 140.167px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Hide chat</div>
+    </div>
+
+    <div id="lho_chat_bar" style="position: fixed; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; opacity: 0; touch-action: none; left: -202.02px; top: 0px; width: 200.2px; height: 327.6px; border: 2px solid black; background-color: rgb(77, 96, 120);">
+      <div id="lho_chat_bar_messages" style="position: absolute; touch-action: pan-y; top: 9.555px; left: 9.555px; height: 262.762px; width: 181.09px; font-size: 10.9883px; padding-top: 1.19437px; background-color: rgb(25, 32, 39); border-radius: 7.58333px; overflow-y: scroll;"></div>
+      <input type="text" placeholder="Enter chat message here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="" id="lho_msg" style="position: absolute; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; user-select: text; top: 280.678px; left: 9.555px; width: 175.63px; height: 11.9437px; line-height: 10.9883px; font-size: 10.9883px;">
+      <div id="lho_chat_bar_button" style="position: absolute; opacity: 1; top: 300.983px; left: 9.555px; height: 18.2px; width: 85.7675px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; pointer-events: auto; transform: scale(1);">Send chat</div>
+      <div id="lho_chat_hide_button" style="position: absolute; opacity: 0; top: 300.983px; left: 104.877px; height: 18.2px; width: 85.7675px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Hide chat</div>
+    </div>
+    <div id="rho_chat_bar" style="position: fixed; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; opacity: 0; touch-action: none; left: 1037px; top: 0px; width: 200.2px; height: 327.6px; border: 2px solid black; background-color: rgb(77, 96, 120);">
+      <div id="rho_chat_bar_messages" style="position: absolute; touch-action: pan-y; top: 9.555px; left: 9.555px; height: 262.762px; width: 181.09px; font-size: 10.9883px; padding-top: 1.19437px; background-color: rgb(25, 32, 39); border-radius: 7.58333px; overflow-y: scroll;"></div>
+      <input type="text" placeholder="Enter chat message here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="" id="rho_msg" style="position: absolute; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; user-select: text; top: 280.678px; left: 9.555px; width: 175.63px; height: 11.9437px; line-height: 10.9883px; font-size: 10.9883px;">
+      <div id="rho_chat_bar_button" style="position: absolute; opacity: 1; top: 300.983px; left: 9.555px; height: 18.2px; width: 85.7675px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; pointer-events: auto; transform: scale(1);">Send chat</div>
+      <div id="rho_chat_hide_button" style="position: absolute; opacity: 0; top: 300.983px; left: 104.877px; height: 18.2px; width: 85.7675px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Hide chat</div>
+    </div>
+
+    <div id="dir_chat_bar" style="position: fixed; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; text-align: center; opacity: 0; touch-action: none; left: 1037px; top: 0px; width: 273px; height: 327.6px; border: 2px solid black; background-color: rgb(204, 102, 102); font-size: 14.3325px;">
+      <b id="director_chat_title">Director Chat</b>
+      <div id="dir_chat_bar_messages" style="position: absolute; text-align: left; touch-action: pan-y; top: 19.11px; left: 9.555px; height: 253.208px; width: 253.89px; font-size: 10.9883px; padding-top: 1.19437px; background-color: rgb(255, 221, 221); border-radius: 7.58333px; overflow-y: scroll;"></div>
+      <input type="text" placeholder="Enter chat message here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="" id="dir_msg" style="position: absolute; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; user-select: text; top: 280.678px; left: 9.555px; width: 248.43px; height: 11.9437px; line-height: 10.9883px; font-size: 10.9883px;">
+      <div id="dir_chat_bar_button" style="position: absolute; opacity: 1; top: 300.983px; left: 9.555px; height: 18.2px; width: 122.167px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px; pointer-events: auto; transform: scale(1);">Send chat</div>
+      <div id="dir_chat_hide_button" style="position: absolute; opacity: 0; top: 300.983px; left: 141.278px; height: 18.2px; width: 122.167px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 14.56px; border-radius: 1.82px;">Close chat</div>
+    </div>
+
+
+
+
+
+    <div id="i_am_declarer" style="position: fixed; font-family: Roboto, Arial, sans-serif; text-align: center; opacity: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; background-color: rgb(192, 196, 214); left: 254.8px; width: 218.4px; top: 165.984px; height: 72.072px; font-size: 14.56px; line-height: 18.2px; border-radius: 18.018px;">I am declarer.<br>Show me dummy's shape.</div>
+    <div id="show_me_dummy" style="position: fixed; font-family: Roboto, Arial, sans-serif; text-align: center; opacity: 0; pointer-events: none; background-color: rgb(192, 196, 214); left: 276.64px; width: 72.8px; top: 338.957px; height: 43.2432px; border-radius: 10.8108px;"><img id="mb_pass_ic" style="top: 2%; height: 96%; transform: rotate(90deg)" src="https://play.realbridge.online/bidbox/png/PASSBB.png"></div>
+    <div id="double_and_dummy" style="position: fixed; font-family: Roboto, Arial, sans-serif; text-align: center; opacity: 0; pointer-events: none; background-color: rgb(192, 196, 214); left: 378.56px; width: 72.8px; top: 338.957px; height: 43.2432px; border-radius: 10.8108px;"><img id="mb_dbl_ic" style="top: 2%; height: 96%; transform: rotate(90deg)" src="https://play.realbridge.online/bidbox/png/XBB.png"></div>
+
+    <div style="position:fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; touch-action: none">
+      <img id="bb_alert_button" style="position: fixed; opacity: 0; left: 448.631px; top: 86.2357px;" src="https://play.realbridge.online/bidbox/png/ALERTBB.png" height="142" width="28">
+    </div>
+    <div id="bb_container" style="touch-action: none; position: fixed; border: 1.82px solid transparent; pointer-events: none; width: 219.413px; left: 254.293px; top: 51.7564px; height: 265.579px; overflow-y: hidden; opacity: 0;"><img width="156" height="279" src="https://play.realbridge.online/bidbox/png/1CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 0; object-position: 0px 0px; top: 32.0365px; left: 31.3448px;"><img width="156" height="279" src="https://play.realbridge.online/bidbox/png/1DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 1; object-position: 0px 0px; top: 32.0365px; left: 31.3448px;"><img width="151" height="279" src="https://play.realbridge.online/bidbox/png/1HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 2; object-position: 9.64454px 0px; top: 32.0365px; left: 31.3448px;"><img width="156" height="279" src="https://play.realbridge.online/bidbox/png/1SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 3; object-position: 0px 0px; top: 32.0365px; left: 31.3448px;"><img width="156" height="279" src="https://play.realbridge.online/bidbox/png/1NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 4; object-position: 0px 0px; top: 32.0365px; left: 31.3448px;"><img width="156" height="259" src="https://play.realbridge.online/bidbox/png/2CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 5; object-position: 0px 0px; top: 52.0365px; left: 31.3448px;"><img width="156" height="259" src="https://play.realbridge.online/bidbox/png/2DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 6; object-position: 0px 0px; top: 52.0365px; left: 31.3448px;"><img width="151" height="259" src="https://play.realbridge.online/bidbox/png/2HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 7; object-position: 9.64454px 0px; top: 52.0365px; left: 31.3448px;"><img width="156" height="259" src="https://play.realbridge.online/bidbox/png/2SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 8; object-position: 0px 0px; top: 52.0365px; left: 31.3448px;"><img width="156" height="259" src="https://play.realbridge.online/bidbox/png/2NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 9; object-position: 0px 0px; top: 52.0365px; left: 31.3448px;"><img width="156" height="238" src="https://play.realbridge.online/bidbox/png/3CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 10; object-position: 0px 0px; top: 73.0365px; left: 31.3448px;"><img width="156" height="238" src="https://play.realbridge.online/bidbox/png/3DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 11; object-position: 0px 0px; top: 73.0365px; left: 31.3448px;"><img width="151" height="238" src="https://play.realbridge.online/bidbox/png/3HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 12; object-position: 9.64454px 0px; top: 73.0365px; left: 31.3448px;"><img width="156" height="238" src="https://play.realbridge.online/bidbox/png/3SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 13; object-position: 0px 0px; top: 73.0365px; left: 31.3448px;"><img width="156" height="238" src="https://play.realbridge.online/bidbox/png/3NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 14; object-position: 0px 0px; top: 73.0365px; left: 31.3448px;"><img width="156" height="218" src="https://play.realbridge.online/bidbox/png/4CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 15; object-position: 0px 0px; top: 93.0365px; left: 31.3448px;"><img width="156" height="218" src="https://play.realbridge.online/bidbox/png/4DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 16; object-position: 0px 0px; top: 93.0365px; left: 31.3448px;"><img width="151" height="218" src="https://play.realbridge.online/bidbox/png/4HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 17; object-position: 9.64454px 0px; top: 93.0365px; left: 31.3448px;"><img width="156" height="218" src="https://play.realbridge.online/bidbox/png/4SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 18; object-position: 0px 0px; top: 93.0365px; left: 31.3448px;"><img width="156" height="218" src="https://play.realbridge.online/bidbox/png/4NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 19; object-position: 0px 0px; top: 93.0365px; left: 31.3448px;"><img width="156" height="197" src="https://play.realbridge.online/bidbox/png/5CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 20; object-position: 0px 0px; top: 114.037px; left: 31.3448px;"><img width="156" height="197" src="https://play.realbridge.online/bidbox/png/5DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 21; object-position: 0px 0px; top: 114.037px; left: 31.3448px;"><img width="151" height="197" src="https://play.realbridge.online/bidbox/png/5HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 22; object-position: 9.64454px 0px; top: 114.037px; left: 31.3448px;"><img width="156" height="197" src="https://play.realbridge.online/bidbox/png/5SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 23; object-position: 0px 0px; top: 114.037px; left: 31.3448px;"><img width="156" height="197" src="https://play.realbridge.online/bidbox/png/5NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 24; object-position: 0px 0px; top: 114.037px; left: 31.3448px;"><img width="156" height="177" src="https://play.realbridge.online/bidbox/png/6CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 25; object-position: 0px 0px; top: 134.037px; left: 31.3448px;"><img width="156" height="177" src="https://play.realbridge.online/bidbox/png/6DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 26; object-position: 0px 0px; top: 134.037px; left: 31.3448px;"><img width="151" height="177" src="https://play.realbridge.online/bidbox/png/6HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 27; object-position: 9.64454px 0px; top: 134.037px; left: 31.3448px;"><img width="156" height="177" src="https://play.realbridge.online/bidbox/png/6SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 28; object-position: 0px 0px; top: 134.037px; left: 31.3448px;"><img width="156" height="177" src="https://play.realbridge.online/bidbox/png/6NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 29; object-position: 0px 0px; top: 134.037px; left: 31.3448px;"><img width="156" height="156" src="https://play.realbridge.online/bidbox/png/7CBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 30; object-position: 0px 0px; top: 155.037px; left: 31.3448px;"><img width="156" height="156" src="https://play.realbridge.online/bidbox/png/7DBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 31; object-position: 0px 0px; top: 155.037px; left: 31.3448px;"><img width="151" height="156" src="https://play.realbridge.online/bidbox/png/7HBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 32; object-position: 9.64454px 0px; top: 155.037px; left: 31.3448px;"><img width="156" height="156" src="https://play.realbridge.online/bidbox/png/7SBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 33; object-position: 0px 0px; top: 155.037px; left: 31.3448px;"><img width="156" height="156" src="https://play.realbridge.online/bidbox/png/7NTBB.png" draggable="false" style="position: absolute; object-fit: contain; z-index: 34; object-position: 0px 0px; top: 155.037px; left: 31.3448px;"><img width="156" height="184" src="https://play.realbridge.online/bidbox/png/XBB.png" draggable="false" style="position: absolute; z-index: 35; transform: rotate(0deg); top: 178.876px; left: 31.3448px;"><img width="156" height="184" src="https://play.realbridge.online/bidbox/png/XXBB.png" draggable="false" style="position: absolute; z-index: 36; transform: rotate(0deg); top: 178.876px; left: 31.3448px;"><img width="156" height="184" src="https://play.realbridge.online/bidbox/png/PASSBB.png" draggable="false" style="position: absolute; z-index: 37; transform: rotate(0deg); top: 178.876px; left: 31.3448px;"><div style="position: absolute; left: 10%; width: 80%; z-index: 1000; background: linear-gradient(rgba(30, 71, 4, 0) 0%, rgb(30, 71, 4) 100%); top: 242.155px; height: 23.4234px; opacity: 1;"></div></div>
+    <div id="bb_alert_box" style="font-family: Roboto, Arial, sans-serif; text-align: center; pointer-events: none; touch-action: none; opacity: 0; position: fixed; background-color: rgb(30, 71, 4); border: 1px solid black; border-radius: 10.8108px; width: 156.724px; height: 54.7026px; left: 287.205px; top: 268.578px;">
+     <input type="text" placeholder="Explain bid here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="alert_explain" maxlength="200" style="user-select: text; position: absolute; left: 6.26895px; width: 142.619px; top: 3.31531px; height: 16.5766px; font-size: 13.2612px;">
+      <div id="♠" style="position: absolute; opacity: 0; pointer-events: none; top: 24.8648px; left: 6.26895px; height: 27.027px; width: 27.027px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 21.6216px; border-radius: 2.7027px; line-height: 23.4234px;">♠</div>
+      <div id="♡" style="position: absolute; opacity: 0; pointer-events: none; top: 24.8648px; left: 36.0465px; height: 27.027px; width: 27.027px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 21.6216px; border-radius: 2.7027px; line-height: 25.9459px;">♡</div>
+      <div id="♢" style="position: absolute; opacity: 0; pointer-events: none; top: 24.8648px; left: 65.824px; height: 27.027px; width: 27.027px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 21.6216px; border-radius: 2.7027px; line-height: 25.9459px;">♢</div>
+      <div id="♣" style="position: absolute; opacity: 0; pointer-events: none; top: 24.8648px; left: 95.6015px; height: 27.027px; width: 27.027px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 21.6216px; border-radius: 2.7027px; line-height: 23.4234px;">♣</div>
+      <div id="show_explain_list" style="position: absolute; opacity: 0; top: 24.8648px; left: 125.379px; height: 27.027px; width: 27.027px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 21.6216px; border-radius: 2.7027px;">
+        <img id="burger_icon" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/menu.svg">
+      </div>
+      <select type="text" size="10" id="explanations" style="opacity: 0; pointer-events: none; resize: none; position: absolute; left: 6.26895px; width: 313.448px; top: 3.31531px; height: 172.396px; font-size: 13.2612px;"></select>
+    </div>
+    <div id="add_exp_box" style="font-family: Roboto, Arial, sans-serif; text-align: center; pointer-events: none; touch-action: none; opacity: 0; width: 235.086px; height: 59.6756px; border-radius: 3.31531px; background-color: rgb(221, 255, 170);">
+      <input type="text" placeholder="Add explanation" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="add_explain" maxlength="200" style="position: absolute; left: 3%; top: 7%; user-select: text; width: 142.619px; height: 16.5766px; font-size: 13.2612px;">
+      <div id="add♠" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">♠</div>
+      <div id="add♡" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">♡</div>
+      <div id="add♢" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">♢</div>
+      <div id="add♣" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">♣</div>
+      <div id="add_exp" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">Add</div>
+      <div id="cancel_exp" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">Cancel</div>
+      <div id="add_show_explain_list" style="position: absolute; opacity: 0; background-color: rgb(192, 196, 214); pointer-events: none; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif;">
+        <img id="add_burger_icon" style="position: absolute; left: 10%; top: 10%; width: 80%; height: 80%" src="https://play.realbridge.online/icons/menu.svg">
+      </div>
+      <select type="text" size="10" id="add_explanations" style="opacity: 0; pointer-events: none; resize: none; position: absolute; left: 6.26895px; width: 313.448px; top: 3.31531px; height: 125.982px; font-size: 13.2612px;"></select>
+    </div>
+
+    <div id="replace_player_box" style="font-family: Roboto, Arial, sans-serif; text-align: center; opacity: 0; pointer-events: none; touch-action: none; left: -10000px;">
+      <input type="text" placeholder="New player name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="new_player_name" maxlength="200" style="margin: 2% auto 0% auto; user-select: text; -webkit-user-select: text">
+      <div id="replace_player" style="position: absolute; pointer-events: none; background-color: rgb(192, 196, 214); opacity: 0;">Replace</div>
+      <div id="cancel_replace_player" style="position: absolute; pointer-events: none; background-color: rgb(192, 196, 214); opacity: 0;">Cancel</div>
+    </div>
+
+    <div id="cc_link_box" style="font-family: Roboto, Arial, sans-serif; text-align: center; opacity: 0; pointer-events: none; touch-action: none">
+      <input type="text" placeholder="Convention card link" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="new_cc_link" maxlength="400" style="margin: 2% auto 0% auto; user-select: text; -webkit-user-select: text">
+      <div id="ok_cc_link" style="position: absolute">OK</div>
+      <div id="cancel_cc_link" style="position: absolute">Cancel</div>
+    </div>
+
+    <div id="result_box" style="text-align: center; font-size: 14.4144px; border-radius: 0px; opacity: 0; pointer-events: none; position: fixed; font-family: Roboto, Arial, sans-serif; left: 305.748px; touch-action: none; width: 112.828px; height: 112.828px; top: 145.588px; border: 1.82px solid black; background-color: rgb(255, 255, 170);">
+      <span style="display: inline-block; margin-top: 7.2072px;" id="result_text"><br><br><br>waiting...</span>
+      <div id="ok_button" style="position: absolute; opacity: 0; width: 108.108px; left: 2.35999px; top: 79.2792px; height: 21.6216px; border-radius: 3.6036px; font-size: 14.4144px; line-height: 21.6216px; background-color: rgb(192, 196, 214); vertical-align: middle;">OK</div>
+      <div id="play_round_button" style="position: absolute; opacity: 0; width: 72.072px; left: 20.378px; top: 79.2792px; height: 21.6216px; border-radius: 3.6036px; font-size: 14.4144px; line-height: 21.6216px; background-color: rgb(192, 196, 214); vertical-align: middle;">Play round</div>
+    </div>
+
+    <div id="lobby_div" style="overflow: visible scroll; position: fixed; background-color: rgb(77, 96, 120); left: 0pt; top: 0pt; width: 1037px; height: 455px; font-family: Roboto, Arial, sans-serif; font-size: 20px; touch-action: pan-y; pointer-events: auto;"><div id="switch_view_button" style="height: 15.1667px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 10.6167px; border-radius: 1.51667px; background-color: rgb(192, 196, 214); width: 91px; position: absolute; top: 37.1583px; left: 3.03333px; line-height: 15.1667px; opacity: 1; pointer-events: auto;">Switch view</div><div id="sort_text" style="height: 15.1667px; text-align: right; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 10.6167px; width: 54.6px; position: absolute; top: 37.1583px; left: 97.0667px;">Sort:</div><select id="sort_choose" style="height: 13.65px; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 10.6167px; width: 68.25px; position: absolute; top: 37.1583px; left: 154.7px;"><option value="0">Table No ↑</option><option value="1">Table No ↓</option><option value="2">Empty seats</option><option value="3">Slow</option><option value="4">Fast</option><option value="5">Score</option></select><div id="filter_text" style="height: 15.1667px; text-align: right; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 10.6167px; width: 38.22px; position: absolute; top: 37.1583px; left: 225.983px;">Filter:</div><input id="filter_edit" style="height: 10.6167px; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 10.6167px; width: 68.25px; position: absolute; top: 37.1583px; left: 267.237px;"><div id="fake_div" style="position: absolute; top: 0px; left: 0%; width: 100%; pointer-events: none; height: 0px;"></div><div id="table_container_0" style="position: absolute; top: 64.4583px; left: 0px;"><div id="lobby_table_number_0" style="position: absolute; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; background-color: rgb(30, 71, 4); border: 3.03333px solid black; top: 18.2px; left: 103.133px; height: 30.3333px; width: 30.3333px; opacity: 1;"><div id="table_number_0" style="position: absolute; top: 7.58333px; width: 30.3333px; color: rgb(255, 255, 170); line-height: 0.95; opacity: 1;">1</div></div><div style="position: absolute; text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 10.6167px; line-height: 15.1667px; border-radius: 1.51667px; overflow: hidden; background-color: rgb(224, 228, 246); opacity: 1; pointer-events: auto; top: 0px; left: 75.8333px; white-space: normal; height: 15.1667px; width: 91px;">Sit N</div><div style="position: absolute; text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 10.6167px; line-height: 15.1667px; border-radius: 1.51667px; overflow: hidden; white-space: normal; width: 91px; opacity: 1; background-color: rgb(160, 160, 160); top: 28.8167px; left: 142.567px; height: 15.1667px;">Ken John</div><div style="position: absolute; text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 10.6167px; line-height: 15.1667px; border-radius: 1.51667px; overflow: hidden; background-color: rgb(224, 228, 246); opacity: 1; pointer-events: auto; top: 57.6333px; left: 75.8333px; white-space: normal; height: 15.1667px; width: 91px;">Sit S</div><div style="position: absolute; text-align: center; vertical-align: middle; font-family: &quot;PT Sans Narrow&quot;, &quot;Roboto Condensed&quot;, Roboto, Arial, sans-serif; font-size: 10.6167px; line-height: 15.1667px; border-radius: 1.51667px; overflow: hidden; background-color: rgb(224, 228, 246); opacity: 1; pointer-events: auto; top: 28.8167px; left: 9.1px; white-space: normal; height: 15.1667px; width: 91px;">Sit W</div><div style="position: absolute; background-color: rgb(30, 71, 4); color: rgb(255, 255, 170); text-align: center; vertical-align: middle; white-space: nowrap; font-family: Roboto, Arial, sans-serif; top: 45.5px; left: 100.667px; font-size: 7.88667px; height: 9.85833px; border-radius: 1.51667px; border: 1px solid grey; width: 41.3333px;">T 1</div></div><div style="position: absolute; opacity: 0; pointer-events: none; left: 0%; width: 100%; top: 0px; height: 109.958px;"></div><div id="info_divider" style="position: fixed; left: 792.817px; top: 0px; width: 229.183px; height: 455px; background-color: rgb(121, 137, 163); touch-action: none;"></div><div id="tournament_name_edit" style="position: fixed; top: 0px; left: 0px; height: 34.125px; width: 1037px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 27.3px; line-height: 34.125px; background-color: rgb(255, 255, 170);"></div><div style="position: fixed; top: 9.47917px; left: 15.1667px; height: 15.1667px; width: 345.321px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 15.1667px; line-height: 15.1667px;">David Stevenson</div><div style="position: fixed; background-color: rgb(192, 196, 214); opacity: 1; pointer-events: auto; height: 15.1667px; width: 59.15px; left: 968.75px; top: 9.47917px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px; border-radius: 1.51667px;">Scores</div><div style="position: fixed; top: 37.9167px; left: 800.4px; height: 15.1667px; width: 236.6px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px;">Practice tables</div><div style="position: fixed; top: 56.875px; left: 800.4px; height: 15.1667px; width: 127.4px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px;">1 table</div><div style="position: fixed; top: 75.8333px; left: 800.4px; height: 15.1667px; width: 236.6px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px;">20 boards (1 rounds x 20 boards)</div><div style="position: fixed; top: 94.7917px; left: 800.4px; height: 15.1667px; width: 236.6px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px;">No timer, self-alerts</div><div style="position: fixed; top: 113.75px; left: 800.4px; height: 15.1667px; width: 236.6px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px;"></div><div style="position: fixed; top: 362.104px; left: 800.4px; height: 15.1667px; width: 127.4px; text-align: left; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px;">Lobby (2)</div><div style="position: fixed; background-color: rgb(192, 196, 214); opacity: 1; pointer-events: auto; height: 15.1667px; width: 106.167px; left: 800.4px; top: 343.146px; text-align: center; vertical-align: middle; font-family: Roboto, Arial, sans-serif; font-size: 12.1333px; line-height: 15.1667px; border-radius: 1.51667px;">Send chat</div></div>
+
+    <div id="chat_container" style="opacity: 1; position: fixed; left: 800.4px; touch-action: none; top: 144.083px; width: 220px; height: 367.792px; border: 0px solid transparent;">
+      <div id="messages" style="position: absolute; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; touch-action: pan-y; top: 0px; left: 0px; height: 170.625px; width: 220px; font-size: 9.85833px; padding-top: 3.79167px; background-color: rgb(192, 196, 214); border-radius: 7.58333px; overflow-y: scroll;"></div>
+      <input type="text" placeholder="Enter chat message here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="" id="msg" style="position: absolute; font-family: &quot;PT Sans Narrow&quot;, Roboto, Arial, sans-serif; font-size: 9.85833px; user-select: text; box-sizing: border-box; top: 180.104px; left: 0px; width: 220px; height: 15.1667px; line-height: 9.1px;">
+      <textarea type="text" id="lurkers" readonly="true" style="position: absolute; resize: none; touch-action: pan-y; box-sizing: border-box; left: 0px; top: 236.979px; height: 56.875px; width: 220px; font-size: 7.58333px;">David Stevenson
+Ken Johnston
+</textarea>
+      <div id="contact_rb_lobby" style="display: inline-block; text-align: center; position: relative; font-family: Roboto, Arial, sans-serif; font-size: 7.12833px; left: 0px; top: 293.854px; width: 220px;">RealBridge: 📞&nbsp;+44 (0) 794 232 2209&nbsp;&nbsp;✉️&nbsp;support@realbridge.online</div>
+    </div>
+
+    <div id="login_dialog" style="overflow: hidden; text-align: center; position: absolute; left: -10000px; font-family: Roboto, Arial, sans-serif; padding-bottom: 30px; height: 455px; width: 682.5px; font-size: 14.2188px; line-height: 15.1667px; top: 0px; border-radius: 11.375px; background-color: rgb(121, 137, 163);">
+
+      <img id="realbridgelogo" style="position: absolute; left: 3%; top: 14%; width: 16%" src="https://play.realbridge.online/misc/logo_club.svg">
+      <div id="otherlogobg" style="position: absolute; left: 3%; top: 40%; width: 16%; height: 10%; background-color: #ffffaa; opacity: 0"></div>
+      <img id="otherlogo" style="position: absolute; left: -2%; top: 32%; width: 26%; opacity: 0">
+
+      <select id="language_select" style="position: absolute; left: 3%; top: 5%; width: 16%; height: 5%; font-size: 14.2188px;">
+        <option value="11">🇦🇩 Català</option>
+        <option value="7">🇩🇰 Dansk</option>
+        <option value="3">🇩🇪 🇦🇹 Deutsch</option>󠁰
+        <option value="5">🇬🇷 Ελληνικά</option>
+        <option value="0" selected="selected">🇬🇧 🇺🇸 English</option>
+        <option value="8">🇪🇸 Español</option>
+        <option value="1">🇫🇷 Français</option>
+        <option value="2">🇮🇹 Italiano</option>
+        <option value="13">🇳🇱 Nederlands</option>
+        <option value="9">🇳🇴 Norsk bokmål</option>
+        <option value="10">🇳🇴 Norsk nynorsk</option>
+        <option value="14">🇵🇱 Polskie</option>
+        <option value="4">🇵🇹 Português</option>
+        <option value="6">🇸🇪 Svenska</option>
+        <option value="12">🇹🇷 Türkçe</option>
+        <option value="15">中文</option>
+      </select>
+
+      <h3 id="login_heading"><b id="login_title" style="font-size: 28.4375px;">RealBridge</b></h3>
+      <label style="display: inline-block; text-align: left; position: relative; width: 17%; left:-3%" for="username" id="locale_full_name">Full Name</label>
+      <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="position: relative; width: 30%; height: 22.75px; font-size: 18.9583px; user-select: text;" type="text" id="username" name="username">
+      <p></p>
+      <label id="id_label" style="display: inline-block; text-align: left; position: relative; width: 17%; left:-3%" for="id_number">ID number</label>
+      <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="position: relative; width: 30%; height: 22.75px; font-size: 18.9583px; user-select: text;" type="text" id="id_number" name="id_number">
+      <p></p>
+      <label id="pw_label" style="display: inline-block; text-align: left; position: relative; width: 17%; left:-3%" for="password">Session key</label>
+      <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="position: relative; width: 30%; height: 22.75px; font-size: 18.9583px; user-select: text;" type="text" id="password" name="password" disabled="">
+      <p></p>
+      <input type="checkbox" id="high_contrast" name="high_contrast" value="high_contrast" style="position: relative; left: 4.5%; font-size: 11.375px; height: 11.375px; width: 11.375px;">
+      <label for="high_contrast" style="position: relative; left: 4.5%" id="locale_high_contrast">High contrast UI</label>
+      <p></p>
+
+      <div id="login_button" style="margin: auto; text-align: center; vertical-align: middle; position: relative; left: 4.5%; opacity: 0; line-height: 22.75px; width: 151.667px; font-size: 18.9583px; border-radius: 3.79167px; background-color: rgb(192, 196, 214); pointer-events: none; transform: scale(1);">Login</div>
+      <p></p>
+
+      <label id="camera_label" style="display:inline-block; text-align: left; position: relative; width: 18%; left:-1.5%" for="video_input">Camera</label>
+      <select id="video_input" name="video_input" style="position: relative; width: 32%; height: 25.2778px; font-size: 18.9583px;">
+        <option value="0" id="locale_use_default">Use default</option>
+      <option value="3fca16944742643a74e947727536b1295c250c6914f74a715a006fac7b4fdc99">Logi C270 HD WebCam (046d:0825)</option></select>
+      <p></p>
+      <label id="mic_label" style="display:inline-block; text-align: left; position: relative; width: 18%; left:-1.5%" for="audio_input">Microphone</label>
+      <select id="audio_input" name="audio_input" style="position: relative; width: 32%; height: 25.2778px; font-size: 18.9583px;">
+        <option value="0" id="locale_aud_use_default">Use default</option>
+      <option value="default">Default - Microphone (Logi C270 HD WebCam) (046d:0825)</option><option value="communications">Communications - Microphone (Logi C270 HD WebCam) (046d:0825)</option><option value="5d70515ee2cdd5b27e872dba429789ffdfc33712d39be9d858346a3ea898150d">Microphone (Logi C270 HD WebCam) (046d:0825)</option></select>
+      <p></p>
+      <label id="audio_vol_label" style="display: inline-block; text-align: left; position: relative; top: -5px; width: 18%; left: -1.5%; height: 30.3333px; font-size: 15.1667px;" for="audio_vol">Mic volume</label>
+      <meter id="audio_vol" min="0" max="100" value="2.8466796875" style="position: relative; width: 32%; height: 30.3333px; font-size: 18.9583px;"></meter>
+
+      
+      <p></p>
+
+      <div id="contact_rb_login" style="display: inline-block; text-align: center; position: relative; font-family: Roboto, Arial, sans-serif; font-size: 11.375px;">RealBridge: 📞&nbsp;+44 (0) 794 232 2209&nbsp;&nbsp;✉️&nbsp;support@realbridge.online</div>
+      <br>
+
+      <div id="tcpp" style="display: inline-block; text-align: center; position: relative; font-size: 11.375px;"><br>By logging in to RealBridge you agree to our<br><a target="_blank" href="https://realbridge.online/terms-and-conditions.html">Terms and Conditions</a> and <a target="_blank" href="https://realbridge.online/privacy-and-cookies-policy.html">Privacy and Cookies Policy</a></div>
+      <br><br>
+      <div id="dds_ack" style="display: inline-block; position: relative; bottom: 12px; text-align:center; font-size: 12px">Double-double analysis by <a target="_blank" href="https://github.com/dds-bridge/dds">DDS</a></div>
+
+      <div id="version_number" style="position: absolute; bottom: 12px; left: 12px; font-size: 9.47917px;">version 1.3.3</div>
+
+    </div>
+
+    <div id="claim_dialog" style="text-align: center; font-size: 20pt; border-radius: 15pt;
+                                  opacity: 0; position: fixed; pointer-events: none;
+                                  font-family: Roboto, Arial, sans-serif;
+                                  left: -10000px">
+      <div id="0_button" style="position: absolute; opacity: 0;">0</div>
+      <div id="1_button" style="position: absolute; opacity: 0;">1</div>
+      <div id="2_button" style="position: absolute; opacity: 0;">2</div>
+      <div id="3_button" style="position: absolute; opacity: 0;">3</div>
+      <div id="4_button" style="position: absolute; opacity: 0;">4</div>
+      <div id="5_button" style="position: absolute; opacity: 0;">5</div>
+      <div id="6_button" style="position: absolute; opacity: 0;">6</div>
+      <div id="7_button" style="position: absolute; opacity: 0;">7</div>
+      <div id="8_button" style="position: absolute; opacity: 0;">8</div>
+      <div id="9_button" style="position: absolute; opacity: 0;">9</div>
+      <div id="10_button" style="position: absolute; opacity: 0;">10</div>
+      <div id="11_button" style="position: absolute; opacity: 0;">11</div>
+      <div id="12_button" style="position: absolute; opacity: 0;">12</div>
+      <div id="13_button" style="position: absolute; opacity: 0;">13</div>
+      <div id="cancel_claim" style="position: absolute; opacity: 0;"><b>Cancel</b></div>
+    </div>
+
+
+    <div id="info_panel" style="position: fixed; background-color: rgb(221, 221, 221); opacity: 0; pointer-events: none; font-family: campton, Helvetica, Arial, sans-serif; overflow: auto; left: 182px; top: 21.84px; width: 360.36px; height: 360.36px; border: 1.82px solid rgb(0, 0, 0);"></div>
+
+    <div id="results_fade" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;
+                                    background-color: black; opacity: 0.0; pointer-events: none"></div>
+    <div id="results_dialog" style="opacity: 0; position: fixed; font-family: Roboto, Arial, sans-serif; pointer-events: none">
+      <div id="close_results_button" style="position: absolute; opacity: 0;"><img id="close_res_but_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%" src="https://play.realbridge.online/icons/x.svg"></div>
+      <div id="results_dialog_inner"></div>
+    </div>
+
+    <div id="question_dialog" style="text-align: center; vertical-align: middle; font-size: 10.8108px; border-radius: 7.2072px; position: fixed; font-family: Roboto, Arial, sans-serif; left: 182px; opacity: 0; pointer-events: none; top: 332.514px; width: 360.36px; height: 45.045px; background-color: rgb(255, 255, 170); border: 1.82px solid black;">
+      <div style="display: inline-block; position: absolute; width: 70%; top: 28%; left: 0%; margin-left: 2%; margin-right: 30%; text-align: right" id="question_text"></div>
+      <div style="display: inline-block; position: absolute; width: 100%; top: 28%; left: 0%; margin-left: 2%; margin-right: 2%; text-align: center" id="info_text"></div>
+      <div id="yes_button" style="position: absolute; width: 72.072px; height: 18.018px; font-size: 10.8108px; border-radius: 3.6036px; opacity: 0; top: 1.8018px; line-height: 18.018px; left: 268.468px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle;">Accept</div>
+      <div id="no_button" style="position: absolute; width: 72.072px; height: 18.018px; font-size: 10.8108px; border-radius: 3.6036px; opacity: 0; top: 25.2252px; line-height: 18.018px; left: 268.468px; background-color: rgb(192, 196, 214); text-align: center; vertical-align: middle;">Refuse</div>
+    </div>
+
+
+    <div id="bb_explanation" style="pointer-events: none; font-family: Roboto, Arial, sans-serif; text-align: center; vertical-align: middle; z-index: 900000; opacity: 0; position: fixed; background-color: rgb(255, 221, 238); border-radius: 10.8108px;"></div>
+    <div id="settings_fade" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;
+                                    background-color: black; opacity: 0.0; pointer-events: none; z-index: 1000000"></div>
+
+    <div id="adv_settings_dialog" style="position: fixed; left: -10000px; top: -10000px; width: 0px; height: 0px;
+                                    font-family: Roboto, Arial, sans-serif; pointer-events: none; z-index: 1000100">
+
+      <div style="overflow: hidden; height:13%; margin: 0px; padding: 0px; border: 0px;">
+        <h3 id="adv_settings_title" style="text-align: center">Advanced director actions</h3>
+        <div id="adv_settings_close" style="position: absolute; opacity: 0; left: 14.4144px; top: 14.4144px; width: 28.8288px; height: 28.8288px; border-radius: 3.6036px; background-color: rgb(192, 196, 214);"><img id="close_adv_set_ic" style="position: absolute; left: 10%; width: 80%; top: 10%; height: 80%; pointer-events: none" src="https://play.realbridge.online/icons/x.svg"></div>
+      </div>
+      
+      <div id="adv_settings_main" style="overflow: hidden; height:87%; margin: 0px; padding: 0px; border: 0px">
+        <div id="adv_settings_nav_bar" style="display: flex; height: 7%; margin: 0px; padding: 0px; border: 0px; font-weight: 700; font-size: 15px;">
+          <div id="adv_settings_tab0" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 0px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">General</div>
+          <div id="adv_settings_tab1" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 1px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">Players</div>
+          <div id="adv_settings_tab4" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 1px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">Categories</div>
+          <div id="adv_settings_tab2" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 1px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">Load &amp; export</div>
+          <div id="adv_settings_tab3" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 0px 0px 1px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">End session</div>
+        </div>
+
+        <div id="adv_settings_page0" style="height: 93%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="club_parameters_title" style="font-weight: bold">Club and session parameters</span>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <span id="club_name_text">Club name</span>
+            </div>
+            
+            <div style="flex: 16">
+              <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 100%; box-sizing: border-box; user-select: text; -webkit-user-select: text" type="text" id="club_name" name="club_name" value="Test Bridge Club">
+            </div>
+          </div>
+          
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <span id="club_id_number_text">ID #</span>
+            </div>
+            
+            <div style="flex: 16">
+              <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 30%; box-sizing: border-box; user-select: text; -webkit-user-select: text" type="text" id="club_id_number" name="club_id_number" value="999">
+            </div>
+          </div>
+
+          <div id="adv_settings_club_and_session_ebu_1" style="padding-top: 0%; padding-bottom: 1%">
+            <div style="display: flex; align-items:center">
+              <div style="flex: 6">
+                <span id="ebu_charge_code_text">EBU charge code</span>
+              </div>
+              
+              <div style="flex: 16">
+                <select name="ebu_charge_code" id="ebu_charge_code" style="width: 100%; box-sizing: border-box">
+                  <option value="0">Charge code</option>
+                  <option value="2">02 Null session</option>
+                  <option value="3">03 Free session</option>
+                  <option value="4">04 Novice session</option>
+                  <option value="6">06 Children in Need</option>
+                  <option value="7">07 Non-EBU EBU Simul</option>
+                  <option value="8">08 Already paid UMS</option>
+                  <option value="10">10 Normal club session</option>
+                  <option value="11">11 Supervised session</option>
+                  <option value="12">12 Mentor session</option>
+                  <option value="14">14 Trial clubs session</option>
+                  <option value="20">20 County event</option>
+                  <option value="21">21 League or knockout</option>
+                  <option value="22">22 Novice session</option>
+                  <option value="30">30 Licensed event</option>
+                  <option value="40">40 Licensed charity</option>
+                  <option value="50">50 Affiliated blue pt</option>
+                  <option value="60">60 County green-point</option>
+                  <option value="70">70 Commercial (Eng)</option>
+                  <option value="71">71 Commercial (ex-Eng)</option>
+                  <option value="90">90 EBU only</option>
+                  <option value="91">91 EBU only</option>
+                  <option value="92">92 EBU only</option>
+                  <option value="99">99 EBU only</option>
+                </select>
+              </div>
+            </div>
+          </div>
+            
+          <div id="adv_settings_club_and_session_ebu_2" style="padding-top: 0%; padding-bottom: 1%">
+            <div style="display: flex; align-items:center">
+              <div style="flex: 6">
+                <span id="masterpoint_text">Masterpoint scale</span>
+              </div>
+              
+              <div style="flex: 16">
+                <select name="ebu_masterpoint_scale" id="ebu_masterpoint_scale" style="width: 30%; box-sizing: border-box">
+                  <option value="0">No MPs</option>
+                  <option value="1">Club scale</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="adv_settings_club_and_session_end"></div>
+          
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="broadcast_video_title" style="font-weight: bold">Broadcast video</span>
+          </div>
+
+          <div style="display: flex; align-items:center; justify-content: center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 1">
+              <div id="broadcast_button" style="margin: auto; opacity: 0;">All</div>
+            </div>
+            
+            <div style="flex: 1">
+              <div id="broadcast_lobby_button" style="margin: auto; opacity: 0;">Lobby</div>
+            </div>
+
+            <div style="flex: 1">
+              <div id="broadcast_group_button" style="margin: auto; opacity: 0;">Group</div>
+            </div>
+          </div>
+          
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="do_draw_title" style="font-weight: bold">Draw</span>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 1; justify-content: center">
+              <div id="do_draw_button" style="margin: auto; opacity: 0;">Show draw</div>
+            </div>
+
+            <div style="flex: 2">
+            </div>
+          </div>
+
+          <div style="display:flex; align-items: top; justify-content: left; padding-top: 0%; padding-bottom: 0%">
+
+            <div style="flex: 1">
+              <div style="padding-top: 4%; padding-bottom: 1%">
+                <span id="observers_title" style="font-weight: bold">Watching at the table</span>
+              </div>
+
+              <div style="padding-top: 0%; padding-bottom: 1%">
+                <input type="radio" id="obs_none" name="observers" value="none"><label for="obs_none" id="locale_obs_none">Not allowed</label><br>
+                <input type="radio" id="obs_break" name="observers" value="break"><label for="obs_break" id="locale_obs_break">Allowed during breaks</label><br>
+                <input type="radio" id="obs_all" name="observers" value="all"><label for="obs_all" id="locale_obs_all">Always allowed</label>
+              </div>
+            </div>
+
+            <div style="flex: 1">
+              <div style="padding-top: 4%; padding-bottom: 1%">
+                <span id="commentary_title" style="font-weight: bold">Commentary</span>
+              </div>
+
+              <div style="padding-top: 0%; padding-bottom: 1%">
+                <input type="checkbox" id="show_commentary"><label for="show_commentary" id="locale_show_commentary">Show deal commentary</label>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div id="adv_settings_page0_end"></div>
+        </div>
+
+        <div id="adv_settings_page1" style="height: 93%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div id="adv_settings_player_validation_1" style="padding-top: 4%; padding-bottom: 1%">
+            <span id="player_validation_title" style="font-weight: bold">Player validation</span>
+          </div>
+          
+          <div id="adv_settings_player_validation_2" style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 1; justify-content: center">
+              <div id="figb_button">FIGB</div>
+            </div>
+
+            <div style="flex: 2;">
+            </div>
+          </div>
+
+          <div id="adv_settings_player_validation_end"></div>
+
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="edit_player_title" style="font-weight: bold">Edit player</span>
+          </div>
+          
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+            </div>
+            
+            <div style="flex: 10">
+              <select name="edit_player_select" id="edit_player_select" style="width: 100%; box-sizing: border-box">
+                <option value="" id="locale_select_edit_player">Select player to edit</option>
+              </select>
+            </div>
+
+            <div style="flex: 6">
+            </div>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 16">
+              <div style="display: flex; align-items:center">
+                <div style="flex: 6; padding-top: 0%; padding-bottom: 2%">
+                  <span id="edit_name_text">Name</span>
+                </div>
+                
+                <div style="flex: 10; padding-top: 0%; padding-bottom: 1.5%">
+                  <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 100%; box-sizing: border-box; user-select: text; -webkit-user-select: text" type="text" id="edit_player_name" name="edit_player_name" value="">
+                </div>
+              </div>
+
+              <div style="display: flex; align-items:center">
+                <div style="flex: 6">
+                  <span id="edit_id_text">ID number</span>
+                </div>
+                
+                <div style="flex: 10">
+                  <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 100%; box-sizing: border-box; user-select: text; -webkit-user-select: text" type="text" id="edit_player_id" name="edit_player_id" value="">
+                </div>
+              </div>
+            </div>
+            
+            <div style="flex: 6">
+              <div id="do_player_edit_button" style="margin: auto; opacity: 0;">Make edit</div>
+            </div>
+          </div>
+
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="remove_player_title" style="font-weight: bold">Remove player</span>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <span id="kick_from_table_text">From table</span>
+            </div>
+            
+            <div style="flex: 10">
+              <select name="player_select" id="player_select" style="width: 100%; box-sizing: border-box">
+                <option value="" id="locale_select_player_kick">Select player to kick to lobby</option>
+              </select>
+            </div>
+
+            <div style="flex: 6">
+              <div id="kick_button" style="margin: auto; opacity: 0;">Kick player to lobby</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <span id="kick_from_session_text">From session</span>
+            </div>
+            
+            <div style="flex: 10">
+              <select name="player_select_nuke" id="player_select_nuke" style="width: 100%; box-sizing: border-box">
+                <option value="" id="locale_select_player_nuke">Select player to kick out</option>
+              </select>
+            </div>
+            
+            <div style="flex: 6">
+              <div id="kick_button_nuke" style="margin: auto; opacity: 0;">Kick player out</div>
+            </div>
+          </div>
+
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="destroy_pair_title" style="font-weight: bold">Destroy pair (convert to sit-out &amp; remove all results)</span>
+          </div>
+
+          <div id="destroy_pair_div" style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 16">
+              <select name="destroy_pair_select" id="destroy_pair_select" style="width: 100%; box-sizing: border-box">
+                <option value="-1" id="locale_select_destroy_pair">Select pair to destroy</option>
+              </select>
+            </div>
+            
+            <div style="flex: 6">
+              <div id="do_destroy_pair_button" style="margin: auto; opacity: 0;">Destroy</div>
+            </div>
+          </div>
+
+          <div id="adv_settings_page1_end"></div>
+        </div>
+
+        <div id="adv_settings_page2" style="height: 93%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="config_file_title" style="font-weight: bold">Config file</span>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <label for="config_file"><div id="locale_load_config">Load config file</div></label>
+              <input type="file" id="config_file" name="config_file" accept=".json" style="display:none">
+            </div>
+            
+            <div style="flex: 16; overflow: hidden">
+              <div style="width: 100%; white-space:nowrap; overflow: hidden; color: yellow" id="config_text">No config file loaded</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <div id="export_config" style="opacity: 0;">Export config</div>
+            </div>
+
+            <div style="flex: 16">
+              <span id="export_config_link">(download link appears in chat)</span>
+            </div>
+          </div>
+
+          <div style="padding-top: 4%; padding-bottom: 1%">
+            <span id="adv_pbn_file_title" style="font-weight: bold">PBN file load</span>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 1%">
+            <input type="radio" name="adv_pbn_load_type" id="adv_import_pbn_boards_only">
+            <label for="adv_import_pbn_boards_only" id="locale_adv_import_pbn_boards_only">Boards</label>
+            <br>
+            <input type="radio" name="adv_pbn_load_type" id="adv_import_pbn_results_only">
+            <label for="adv_import_pbn_results_only" id="locale_adv_import_pbn_results_only">Results</label>
+            <br>
+            <input type="radio" name="adv_pbn_load_type" id="adv_import_pbn_boards_and_results">
+            <label for="adv_import_pbn_boards_and_results" id="locale_adv_import_pbn_boards_and_results">Boards + results</label>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <label for="adv_pbn_file"><div id="locale_adv_load_pbn">Load PBN file</div></label>
+              <input type="file" id="adv_pbn_file" name="adv_pbn_file" accept=".pbn" style="display:none">
+            </div>
+            
+            <div style="flex: 16; overflow: hidden">
+              <div style="width: 100%; white-space:nowrap; overflow: hidden; color: yellow; line-height: 1.2" id="adv_pbn_text">No PBN file loaded</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 6">
+              <div id="remove_imported_results_button" style="opacity: 0;">Remove results</div>
+            </div>
+
+            <div style="flex: 16; overflow: hidden">
+              <div style="width: 100%; white-space:nowrap; overflow: hidden; color: yellow; line-height: 1.2" id="adv_pbn_text2"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="adv_settings_page3" style="height: 93%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div id="warning" style="padding-top: 4%; padding-bottom: 1%; text-align: center; left: 3%; width: 94%">
+            <h4><b>WARNING - DANGER</b><br><b>Reboot and Destroy:<br>these buttons require two clicks</b></h4>
+          </div>
+
+          <div style="display: flex; align-items:center; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 1">
+            </div>
+            
+            <div style="flex: 5; justify-content: center; overflow: hidden">
+              <div id="reboot_button" style="opacity: 0;">Reboot session</div>
+            </div>
+
+            <div style="flex: 1">
+            </div>
+
+            <div style="flex: 5; justify-content: center; overflow: hidden">
+              <div id="nuke_button" style="opacity: 0;">Destroy session</div>
+            </div>
+
+            <div style="flex: 1">
+            </div>
+          </div>
+        </div>
+
+        <div id="adv_settings_page4" style="height: 93%; margin: 0px; padding: 0px; border: 0px; overflow: hidden">
+          <div style="height: 95%; display:flex; flex-direction: column">
+            <div id="cat_edit_names" style="display: flex; align-items:left; padding-top: 4%">
+              <div id="cat_edit_names_text" style="flex: 2; margin: 0% 0.25% 0% 0%">Category Name</div>
+              <input id="cat_edit_0" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+              <input id="cat_edit_1" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+              <input id="cat_edit_2" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+              <input id="cat_edit_3" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+            </div>
+
+            <div id="cat_edit_sort_orders" style="display: flex; align-items:left; padding-top: 0.5%">
+              <div id="cat_edit_sort_orders_text" style="flex: 2; margin: 0% 0.25% 0% 0%">Sort Order</div>
+              <input id="cat_edit_so_0" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+              <input id="cat_edit_so_1" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+              <input id="cat_edit_so_2" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+              <input id="cat_edit_so_3" type="text" style="flex: 1; margin: 0% 0.5% 0% 0%; border-width:0px; padding: 0% 0.1% 0% 0.1%; display:block; min-width:0; font-family: 'PT Sans Narrow', Roboto, Arial, sans-serif">
+            </div>
+
+            <div id="cat_edit_table_headings" style="display: flex; align-items:left; padding-top: 1.5%">
+              <div id="cat_edit_team_text" style="flex: 2; margin: 0% 0.25% 0% 0%">Team</div>
+              <div style="flex: 1; margin: 0% 0.5% 0% 0%"></div>
+              <div style="flex: 1; margin: 0% 0.5% 0% 0%"></div>
+              <div style="flex: 1; margin: 0% 0.5% 0% 0%"></div>
+              <div style="flex: 1; margin: 0% 0.5% 0% 0%"></div>
+            </div>
+
+            <hr style="background-color: black; border: 0px transparent; height: 0.1%; margin: 0.5%">
+
+            <div id="cat_edit_table" style="flex-grow: 1; padding-top: 0.5%; overflow-y: scroll">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tournament_settings_dialog" style="position: fixed; left: -10000px; top: -10000px; width: 0px; height: 0px; font-family: Roboto, Arial, sans-serif; pointer-events: none; z-index: 1000100">
+
+      <div style="overflow: hidden; height:8%; margin: 0px; padding: 0px; border: 0px;">
+        <h3 id="tournament_settings_title" style="text-align: center">Session settings</h3>
+      </div>
+  
+      <div id="tournament_settings_main" style="overflow: hidden; height:84%; margin: 0px; padding: 0px; border: 0px">
+        <div id="tournament_settings_nav_bar" style="display: flex; height: 5%; margin: 0px; padding: 0px; border: 0px; font-weight: 700; font-size: 15px;">
+          <div id="tournament_settings_tab0" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 0px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">General</div>
+          <div id="tournament_settings_tab1" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 0px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">Options</div>
+          <div id="tournament_settings_tab2" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 0px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">MiniBridge</div>
+        </div>
+
+        <div id="tournament_settings_page0" style="height: 100%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div style="display: flex; padding-top: 2%; padding-bottom: 0.9%">
+
+            <div style="flex: 3">
+                <select name="scoring_method" id="scoring_method">
+                  <option value="0" id="locale_practice_tables">Practice tables</option>
+                  <option value="1" id="locale_teams">Teams</option>
+                  <option value="2" id="locale_mp_pairs">Matchpoint pairs</option>
+                  <option value="3" id="locale_imp_pairs">IMP pairs</option>
+                  <option value="4" id="locale_bam_teams">BAM Teams</option>
+                </select>
+                <label style="display: inline-block" for="scoring_method" id="locale_scoring_method">Scoring method</label>
+            </div>
+
+            <div style="flex: 2">
+                <input type="checkbox" id="minibridge">
+                <label for="minibridge" id="minibridge_label">MiniBridge</label>
+            </div>
+          </div>
+          
+          <div style="padding-top: 0%; padding-bottom: 0.9%">
+                <select name="movement_type" id="movement_type">
+                  <option value="0" id="locale_mitchell">Mitchell (2 winners)</option>
+                  <option value="1" id="locale_sw_mitchell">Switched Mitchell (1)</option>
+                  <option value="2" id="locale_howell">Howell (1 winner)</option>
+                  <option value="3" disabled="true" id="locale_swiss">Swiss</option>
+                  <option value="4" disabled="true" id="locale_hth">Head-to-head matches</option>
+                  <option value="5" disabled="true" id="locale_rr">Round robin</option>
+                  <option value="6" disabled="true" id="locale_rr_halftime">Round robin (2x½)</option>
+                </select>
+                <label style="display: inline-block" for="movement_type" id="locale_movement">Movement</label>
+          </div>
+          
+          <div style="padding-top: 0%; padding-bottom: 0.9%">
+                <select style="display: inline-block" name="vp_scale" id="vp_scale" disabled="true">
+                  <option value="0" id="locale_vp_none">None</option>
+                  <option value="1">20-0 dis</option>
+                  <option value="2">20.0 con</option>
+                  <option value="3">ABF</option>
+                </select>
+                <label style="display: inline-block" for="vp_scale" id="locale_vp_scale">VP scale</label>
+          </div>
+          
+          <div style="padding-top: 0%; padding-bottom: 0.9%">
+                <input autocomplete="off" style="display: inline-block; width: 12.5%" type="number" id="boards_per_round" name="boards_per_round" min="1" max="60">
+                <label style="display: inline-block" for="boards_per_round" id="locale_boards_per_round">Boards per round</label>
+          </div>
+          
+          <div style="padding-top: 0%; padding-bottom: 0.9%">
+                <input autocomplete="off" style="display: inline-block; width: 12.5%" type="number" id="num_rounds" name="num_rounds" min="1" max="32">
+                <label style="display: inline-block" for="num_rounds" id="locale_num_rounds">Number of rounds</label>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 0.9%">
+            <div style="flex: 3">
+                <input autocomplete="off" style="display: inline-block; width: 25%; user-select: text; -webkit-user-select: text" type="text" id="time_per_round" name="time_per_round">
+                <label style="display: inline-block" for="time_per_round" id="locale_time_per_round">Time / round (eg 15m, 14:30)</label>
+            </div>
+
+            <div style="flex: 2">
+                <select name="time_display" id="time_display">
+                  <option value="0" id="locale_min_only">Show min only</option>
+                  <option value="1" id="locale_mmss">Show mm:ss</option>
+                </select>
+            </div>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.9%">
+            <input autocomplete="off" style="display: inline-block; width: 12.5%" type="number" id="first_board" name="first_board" min="1">
+            <label style="display: inline-block" for="first_board" id="locale_first_board">First board</label>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 0.9%">
+            <div style="flex: 9">
+              <input type="checkbox" id="auto_switch">
+              <label for="auto_switch" id="locale_auto_switch">Auto-⤨ : NS⬌EW at half-time</label>
+            </div>
+
+            <div style="flex: 1">
+            </div>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 0.9%">
+            <div style="flex: 9">
+              <input type="checkbox" id="random_start_seats">
+              <label for="random_start_seats" id="random_start_seats_label">Randomize starting positions</label>
+            </div>
+
+            <div style="flex: 1">
+            </div>
+          </div>
+
+          <div style="padding-top: 0.1%; padding-bottom: 0.2%">
+            <div style="border: 1px solid #444444; width: 90%; height: 0%"></div>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0%">
+            <span id="pbn_file_title" style="font-weight: bold">PBN file load</span>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 0%">
+            <div style="flex: 3">
+              <input type="radio" name="pbn_load_type" id="import_pbn_boards_only">
+              <label for="import_pbn_boards_only" id="locale_import_pbn_boards_only">Boards</label>
+              &nbsp;&nbsp;
+              <input type="radio" name="pbn_load_type" id="import_pbn_boards_and_results">
+              <label for="import_pbn_boards_and_results" id="locale_import_pbn_boards_and_results">Boards + results</label>
+            </div>
+
+            <div style="flex: 2">
+              <label for="pbn_file"><div id="locale_load_pbn">Load PBN file</div></label>
+              <input type="file" id="pbn_file" name="pbn_file" accept=".pbn" style="display:none">
+            </div>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.9%; overflow: hidden">
+            <div id="pbn_text" style="width: 100%; white-space:nowrap; overflow: hidden; color: yellow; line-height: 1.2">No PBN file loaded</div>
+            <div id="pbn_text2" style="width: 100%; white-space:nowrap; overflow: hidden; color: yellow; line-height: 1.2"></div>
+          </div>
+        </div>
+        
+        <div id="tournament_settings_page1" style="height: 100%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div style="padding-top: 2%; padding-bottom: 1%">
+            <input type="checkbox" id="self_alert">
+            <label for="self_alert" id="locale_self_alert">Self-alerts and written explanations</label>
+          </div>
+          
+          <div style="padding-top: 0%; padding-bottom: 1%">
+            <input type="checkbox" id="use_screens">
+            <label for="use_screens" id="locale_use_screens">Screens - video calls with one opponent only</label>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 3">
+              <div style="display: inline-block; line-height: 100%" id="locale_trick_one_delays">Trick 1 delays (lead/dummy/3rd)</div>
+            </div>
+
+            <div style="flex: 2">
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="opening_lead_delay" min="0" max="30">
+              <div style="display: inline-block">/</div>
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="opening_dummy_delay" min="0" max="30">
+              <div style="display: inline-block">/</div>
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="opening_third_delay" min="0" max="30">
+            </div>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 3">
+              <div style="display: inline-block; line-height: 100%" id="locale_auction_delays">Auction delays (dealer/next 3/subsequent)</div>
+            </div>
+
+            <div style="flex: 2">
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="dealer_delay" min="2" max="30">
+              <div style="display: inline-block">/</div>
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="first_round_delay" min="0" max="30">
+              <div style="display: inline-block">/</div>
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="other_bid_delay" min="0" max="30">
+            </div>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 1%">
+            <select name="swiss_teams_odd" id="swiss_teams_odd">
+              <option value="0" id="locale_short_triangle">Triple</option>
+              <option value="1" id="locale_bye">Bye</option>
+            </select>
+            <label style="display: inline-block" for="swiss_teams_odd" id="locale_swiss_teams_odd">Swiss: odd number of teams</label>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 1%">
+            <div style="flex: 3">
+                <input autocomplete="off" style="display: inline-block; width: 40%; user-select: text; -webkit-user-select: text" type="text" id="captain_names" name="captain_names">
+                <label style="display: inline-block" for="captain_names" id="locale_captains">Captains</label>
+            </div>
+
+            <div style="flex: 2">
+                <input type="checkbox" id="captains_start">
+                <label for="captains_start" id="locale_captains_start">Captains start</label>
+            </div>
+          </div>
+
+          <div style="padding-top: 0.5%; padding-bottom: 0.5%">
+            <div style="border: 1px solid #444444; width: 90%; height: 0%"></div>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 1%">
+            <input type="checkbox" id="stop_each_deal">
+            <label for="stop_each_deal" id="locale_stop_each_deal">Stop play after each deal</label>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 1%">
+            <input type="checkbox" id="impose_actions">
+            <label for="impose_actions" id="locale_impose_actions">Impose actions specified in PBN</label>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 1%">
+            <input type="checkbox" id="combine_sitouts">
+            <label for="combine_sitouts" id="locale_combine_sitouts">Combine two sitting-out pairs whenever possible</label>
+          </div>
+
+        </div>
+        
+        <div id="tournament_settings_page2" style="height: 100%; margin: 0px; padding: 0px; border: 0px; overflow: hidden;">
+          <div style="padding-top: 2%; padding-bottom: 0.8%">
+            <b><span id="locale_mb_settings">MiniBridge settings</span></b>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <span id="locale_mb_declarer">When choosing contract, declarer can</span>
+            <select name="mb_declarer" id="mb_declarer">
+              <option value="0" id="locale_mb_dec_dummy">See dummy</option>
+              <option value="1" id="locale_mb_dec_shape">See dummy's shape</option>
+            </select>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <span id="locale_mb_opening_lead">Opening leader can</span>
+            <select name="mb_opening_lead" id="mb_opening_lead">
+              <option value="0" id="locale_mb_see_dummy">See dummy</option>
+              <option value="1" id="locale_mb_see_dummy_shape">See dummy's shape</option>
+              <option value="2" id="locale_mb_not_see">Not see dummy</option>
+            </select>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <input type="checkbox" id="mb_doubles">
+            <label for="mb_doubles" id="locale_mb_doubles">Doubled contracts</label>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <input type="checkbox" id="mb_shape">
+            <label for="mb_shape" id="locale_mb_shape">Distribution view</label>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <input type="checkbox" id="mb_animations">
+            <label for="mb_animations" id="locale_mb_animations">Special effects</label>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <b><span id="locale_mb_contracts">MiniBridge contracts</span></b>
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <input type="radio" name="mb_contracts" id="mb_con_all">
+            <label for="mb_con_all" id="locale_mb_con_all">All contracts (1C-7N)</label>
+            <br>
+            <input type="radio" name="mb_contracts" id="mb_con_def">
+            <label for="mb_con_def" id="locale_mb_con_def">Default contracts (1C-1N,3N,4H,4S,5C,5D,6C-7N)</label>
+            <br>
+            <input type="radio" name="mb_contracts" id="mb_con_cus">
+            <label for="mb_con_cus" id="locale_mb_con_cus">Custom set:&nbsp;&nbsp;</label>
+            <input type="text" id="mb_con_cus_edit" style="width: 55%; user-select: text; -webkit-user-select: text">
+          </div>
+
+          <div style="padding-top: 0%; padding-bottom: 0.8%">
+            <b><span id="locale_mb_delays_hdr">Delays</span></b>
+          </div>
+
+          <div style="display: flex; padding-top: 0%; padding-bottom: 0.8%">
+            <div style="flex: 3">
+              <div style="display: inline-block; line-height: 100%" id="locale_mb_delays">Delays (declarer/contract/pass-double)</div>
+            </div>
+
+            <div style="flex: 2">
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="mb_declarer_delay" min="2" max="30">
+              <div style="display: inline-block">/</div>
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="mb_contract_delay" min="0" max="30">
+              <div style="display: inline-block">/</div>
+              <input autocomplete="off" style="display: inline-block; width: 17%" type="number" id="mb_pass_double_delay" min="0" max="30">
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <div style="display: flex; align-items:center; overflow: hidden; height:8%; margin: 0px; padding: 0px; border: 0px;">
+        <div id="tournament_settings_ok" style="position: absolute; opacity: 0;">OK</div>
+        <div id="tournament_settings_cancel" style="position: absolute; opacity: 0;">Cancel</div>
+      </div>
+    </div>
+
+    <div id="settings_dialog" style="position: fixed; left: -10000px; top: -10000px; width: 0px; height: 0px;
+                                      font-family: Roboto, Arial, sans-serif; pointer-events: none; z-index: 1000100">
+      <br>
+      <span id="settings_title" style="text-align: center; display: block">Settings</span>
+      <div id="settings_main">
+
+        <div style="display: flex">
+          <div style="flex: 1; padding: 3px">
+            <b><span id="locale_display_style">Display style</span></b><br>
+            <input type="radio" id="real_cards" name="display_style" value="real_cards">
+            <label for="real_cards"><span id="locale_detailed_cards">Detailed cards</span></label><br>
+            <input type="radio" id="computer_cards" name="display_style" value="computer_cards">
+            <label for="computer_cards" id="locale_simplified_cards">Simplified cards</label><br>
+            <br>
+
+            <span id="dummy_orientation_label"><b><span id="locale_as_defender">As defender, see dummy</span></b><br></span>
+            <input type="radio" id="faces_declarer" name="dummy_orientation" value="faces_declarer">
+            <label id="faces_declarer_label" for="faces_declarer"><span id="locale_facing_declarer">Facing declarer</span></label><br>
+            <input type="radio" id="faces_me" name="dummy_orientation" value="faces_me">
+            <label id="faces_me_label" for="faces_me"><span id="locale_facing_me">Facing me</span></label><br>
+            <br>
+
+            <span id="partner_dummy_label"><b><span id="locale_as_declarer">As declarer, see dummy as</span></b><br></span>
+            <input type="radio" id="pd_vert" name="partner_dummy" value="pd_vert">
+            <label id="pd_vert_label" for="pd_vert">Vertical suits (facing declarer)</label><br>
+            <input type="radio" id="pd_horiz" name="partner_dummy" value="pd_horiz">
+            <label id="pd_horiz_label" for="pd_horiz">Horizontal hand</label><br>
+            <br>
+
+            <b><span id="locale_input_style">Input style</span></b><br>
+            <input type="radio" id="single_tap" name="input_style" value="single_tap">
+            <label for="single_tap" id="locale_one_click">One click or tap</label><br>
+            <input type="radio" id="double_tap" name="input_style" value="double_tap">
+            <label for="double_tap" id="locale_two_taps">Two taps (tablet)</label><br>
+            <input type="radio" id="double_click" name="input_style" value="double_click">
+            <label for="double_click" id="locale_double_click">Double click (mouse)</label><br>
+            <br>
+
+            <b><span id="locale_alerted_calls">Alerted calls</span></b><br>
+            <input type="checkbox" id="yellow_box" name="yellow_box">
+            <label for="yellow_box" id="yellow_box_label">Yellow border around alerted calls</label>
+            <br>
+            <br>
+
+            <b><span id="locale_deal_animation">Deal animation</span></b><br>
+            <select id="deal_animation">
+              <option value="0" id="locale_fade_in">Fade-in</option>
+              <option value="1" id="locale_waterfall">Waterfall</option>
+              <option value="2" id="locale_slide">Slide</option>
+              <option value="3" id="locale_none">None</option>
+            </select>
+            <br>
+          </div>
+          
+          <div style="flex: 1; padding: 3px">
+            <div id="volume_boost_box" style="border-style: solid; border-width: 1px; padding: 6px">
+              <b><span id="locale_volume_boost">Volume boost</span></b><br>
+              <input type="checkbox" id="enable_volume_boost" name="enable_volume_boost">
+              <span>&emsp;</span>
+              <input style="display: inline-block" type="range" id="volume_boost_slider" name="volume_boost_slider" min="1" max="25" value="0">
+            </div>
+
+            <br>
+            
+            <div id="director_options" style="border-style: solid; border-width: 1px; padding: 6px">
+              <b><span id="locale_director_settings" style="text-align: center; display: block">Director settings</span></b><br>
+
+              <b><span id="locale_director_undo_options">Undo notifications</span></b><br>
+              <input type="radio" id="no_director_undo_notification" name="director_undo_notification" value="no_director_undo_notification">
+              <label for="no_director_undo_notification" id="locale_no_director_undo_notification">None</label><br>
+              <input type="radio" id="director_undo_msg" name="director_undo_notification" value="director_undo_msg">
+              <label for="director_undo_msg" id="locale_director_undo_msg">Message</label><br>
+              <input type="radio" id="director_undo_msg_and_bell" name="director_undo_notification" value="director_undo_msg_and_bell">
+              <label for="director_undo_msg_and_bell" id="locale_director_undo_msg_and_bell">Message &amp; bell</label><br>
+              <br>
+
+              <b><span id="locale_director_move_options">Move notifications</span></b><br>
+              <input type="radio" id="no_director_move_notification" name="director_move_notification" value="no_director_move_notification">
+              <label for="no_director_move_notification" id="locale_no_director_move_notification">None</label><br>
+              <input type="radio" id="director_move_msg" name="director_move_notification" value="director_move_msg">
+              <label for="director_move_msg" id="locale_director_move_msg">Message</label><br>
+              <input type="radio" id="director_move_msg_and_bell" name="director_move_notification" value="director_move_msg_and_bell">
+              <label for="director_move_msg_and_bell" id="locale_director_move_msg_and_bell">Message &amp; bell</label><br>
+              <br>
+              
+              <b><span id="locale_bell_volume">Bell volume</span></b><br>
+              <input style="display: inline-block" type="range" id="bell_volume_slider" name="bell_volume_slider" min="0" max="100">
+              <br>
+            </div>
+          </div>
+
+        </div>
+        <div style="display: flex">
+          <div style="flex: 1; padding: 3px">
+            <b><span id="locale_animation_duration">Animation duration</span></b>
+            <input style="display: inline-block" type="range" id="animation_slider" name="animation_slider" min="0" max="1000">
+          </div>
+          
+          <div style="flex: 1; padding: 3px">
+            <div id="settings_explanations" style="opacity: 0;">Explanations</div>
+            <div id="edit_explanations" style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; opacity: 0; background-color: gray; pointer-events: none">
+              <table id="edit_exp_table" style="position: absolute; top: 3%; width: 100%; border-collapse: collapse">
+              </table>
+              <div id="edit_exp_close" style="position: absolute; opacity: 0;">Close</div>
+            </div>
+          </div>
+        </div>
+    
+        <p></p>
+        <div id="settings_ok" style="position: absolute; opacity: 0;">OK</div>
+        <div id="settings_cancel" style="position: absolute; opacity: 0;">Cancel</div>
+      </div>
+    </div>
+
+    <div id="broadcast_box" style="opacity: 0; position: absolute; z-index: 3000000; pointer-events: none">
+      <div id="broadcast_box_bg" style="background-color: #192027; position: absolute; left: 0%; width: 100%; top: 0%; height: 100%"></div>
+      <video id="broadcast_video" playsinline="" autoplay="" style="position: absolute; left: 5%; width: 90%; top: 5%; height: 90%"></video>
+    </div>
+
+    <div id="director_broadcast_box" style="opacity: 0; position: absolute; z-index: 3000000; pointer-events: none">
+      <div id="director_broadcast_box_bg" style="background-color: #192027; position: absolute; left: 0%; width: 100%; top: 0%; height: 100%"></div>
+      <div id="director_broadcast_text" style="font-family: Roboto, Arial, sans-serif; color: white; position: absolute; top: 10%; width: 100%; text-align: center"></div>
+      <div id="stop_broadcast_button" style="position: fixed; opacity: 0;">Stop</div>
+    </div>
+
+    <div id="share_box" style="opacity: 0; position: absolute; z-index: 3000000; pointer-events: none; font-family: Roboto, Arial, sans-serif">
+      <div style="overflow: hidden; height:10%; margin: 0px; padding-bottom: 1%; border: 0px;">
+        <h3 id="share_title" style="text-align: center">Share</h3>
+      </div>
+
+      <div id="share_box_main" style="overflow: hidden; height:80%; margin: 0% 2%; padding: 0px; border: 0px">
+        <div id="share_box_nav_bar" style="display: flex; height: 7%; margin: 0px; padding: 0px; border: 0px; font-weight: 700; font-size: 15px;">
+          <div id="share_box_tab0" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 0px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">Share Content</div>
+          <div id="share_box_tab1" style="flex: 1; display: flex; align-items:center; justify-content:center; height: 100%; margin: 0px 1px 0px 0px; padding: 0px; border: 0px; text-align: center; white-space: nowrap; overflow: hidden">Share Deal</div>
+        </div>
+
+        <div id="share_box_page0" style="height: 89%; margin: 2% 0%; padding: 0%; border: 0px; overflow: hidden;">
+          <div style="display: flex; justify-content: center; align-items:flex-start; height: 100%; padding: 0%">
+            <div style="flex: 3; height: 100%">
+              <div style="width:100%; padding-top:5%"></div>
+              <div id="share_screen_button" style="width: 90%; margin-right: auto; text-align: center">Share screen</div>
+              <div style="width:100%; padding-top:4%"></div>
+              <div id="stop_screen_share_button" style="width: 90%; margin-right: auto; text-align: center">Stop screen share</div>
+            </div>
+            
+            <div style="flex: 8; height: 100%">
+            </div>
+          </div>
+        </div>
+
+        <div id="share_box_page1" style="height: 89%; margin: 2% 0%; padding: 0%; border: 0px; overflow: hidden;">
+          <div style="display: flex; justify-content: center; align-items:flex-start; height: 100%; padding: 0%">
+            <div style="flex: 8; height: 100%">
+
+              <div style="display: flex; justify-content: center; align-items:flex-start; max-height: 80%">
+                <div style="flex: 2">
+                  <span id="locale_board_to_share">Deal:</span>&nbsp;
+                  <select id="board_to_share"></select>
+                </div>
+            
+                <div style="flex: 7">
+                  <div id="bts_diag" style="width: 98%; height: 100%; text-align: left; overflow: hidden; padding:1%;"></div>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; align-items:flex-start; margin-top:1%">
+                <div style="flex: 2">
+                  <span id="locale_view_to_share">View:</span>
+                </div>
+
+                <div style="flex: 7">
+                  <select id="view_to_share" style="font-family: 'PT Sans Narrow', Roboto, Arial">
+                    <option id="view_option_diagram" value="-1">Diagram</option>
+                    <option id="view_option_0" value="0">N</option>
+                    <option id="view_option_1" value="1">E</option>
+                    <option id="view_option_2" value="2">S</option>
+                    <option id="view_option_3" value="3">W</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; align-items:flex-start; margin-top:1%">
+                <div style="flex: 2">
+                  <span id="locale_result_to_share">Result to share:</span>
+                </div>
+
+                <div style="flex: 7">
+                  <select id="result_to_share" style="width: 100%; text-align: left; overflow: hidden; font-family: 'PT Sans Narrow', Roboto, Arial"></select>
+                </div>
+              </div>
+
+            </div>
+            <div style="flex: 2; height: 100%">
+              <div style="display: flex; flex-direction: column; justify-content:flex-end; align-items:center; height: 100%; padding: 0%">
+                <div id="share_deal_button" style="width: 90%; margin-left: auto; text-align: center">Share deal</div>
+                <div style="width:100%; padding-top:5%"></div>
+                <div id="stop_deal_share_button" style="width: 90%; margin-left: auto; text-align: center">Stop deal share</div>
+                <div style="width:100%; padding-top:5%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items:flex-start; overflow: hidden; height:10%; margin: 0% 2%; padding: 0%; border: 0px;">
+        <div style="flex: 8">
+        </div>
+        <div style="flex: 2">
+          <div id="share_box_cancel" style="width: 90%; margin-left: auto; text-align: center">Close</div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+    <img src="https://play.realbridge.online/bidbox/png/1CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/1DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/1HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/1SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/1NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/2CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/2DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/2HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/2SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/2NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/3CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/3DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/3HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/3SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/3NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/4CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;">
+
+  
+
+
+<img src="https://play.realbridge.online/bidbox/png/4DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/4HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/4SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/4NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/5CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/5DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/5HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/5SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/5NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/6CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/6DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/6HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/6SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/6NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/7CBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/7DBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/7HBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/7SBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/7NTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/XBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/XXBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/PASSBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/ALERTBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/bidbox/png/STOPBB.png" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/1B.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/simplified_C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/C_symbol.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/CB2.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/CB2G.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9C.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9C_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TC.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TC_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JC.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JC_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QC.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QC_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KC.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KC_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AC.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AC_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/simplified_D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/D_symbol.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/DB2.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/DB2G.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9D.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9D_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TD.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TD_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JD.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JD_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QD.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QD_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KD.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KD_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AD.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AD_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/simplified_H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/H_symbol.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/HB2.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/HB2G.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9H.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9H_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TH.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TH_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JH.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JH_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QH.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QH_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KH.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KH_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AH.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AH_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/simplified_S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/S_symbol.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/SB2.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/SB2G.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/2S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/3S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/4S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/5S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/6S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/7S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/8S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9S.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/9S_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TS.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/TS_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JS.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/JS_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QS.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/QS_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KS.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/KS_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AS.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/cards_svg/AS_RB.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/video-off.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/misc/Gear_icon.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/volume-2.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/volume-x.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/grid.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/layers.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/play-circle.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/eye.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/eye-off.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/list.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/refresh-cw.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/video.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/mic.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/user-plus.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/user-minus.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/x.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/chevron-up.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/chevron-down.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/chevron-right.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/chevron-left.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/skip-back.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/rotate-ccw.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/message-square.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/menu.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/file-text.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/PlayedCards.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/PlayedCardsHide.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/BiddingBox5.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/BiddingBox5Hide.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/keyboard.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/keyboardoff.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/info.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/info_slash.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/search.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/tv.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/misc/logo_club.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/globe.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/book-open.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/align-left.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;"><img src="https://play.realbridge.online/icons/layout.svg" style="height: 100px; position: absolute; left: -10000px; top: -10000px;">
+</body></html>
